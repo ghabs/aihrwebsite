@@ -21,11 +21,27 @@ function readContentFile(filename) {
     return { frontmatter: {}, content: md.render(fileContent) };
 }
 
+// Read fellows
+function readFellows() {
+    const fellowsDir = path.join(__dirname, 'content', 'fellows');
+    const fellowFiles = fs.readdirSync(fellowsDir).filter(file => file.endsWith('.md'));
+    
+    return fellowFiles.map(file => {
+        const fellowContent = readContentFile(`fellows/${file}`);
+        return {
+            ...fellowContent.frontmatter,
+            filename: file
+        };
+    }).sort((a, b) => (a.order || 0) - (b.order || 0));
+}
+
 // Load all content
 const hero = readContentFile('hero.md');
 const vision = readContentFile('vision.md');
 const beaconProjects = readContentFile('beacon-projects.md');
 const fellowship = readContentFile('fellowship.md');
+const fellowshipDescription = readContentFile('fellowship-description.md');
+const fellows = readFellows();
 
 // Icon mapping
 const iconSvgs = {
@@ -64,6 +80,24 @@ function generateBeaconProjects() {
     `).join('');
 }
 
+// Generate fellows HTML
+function generateFellows() {
+    return fellows.map(fellow => `
+        <div class="fellow-card">
+            <div class="fellow-portrait">
+                <div class="portrait-placeholder">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="30" cy="20" r="8"/>
+                        <path d="M12 50c0-10 8-18 18-18s18 8 18 18"/>
+                    </svg>
+                </div>
+            </div>
+            <h3 class="fellow-name">${fellow.name}</h3>
+            <p class="fellow-description">${fellow.description}</p>
+        </div>
+    `).join('');
+}
+
 // Generate HTML
 const html = `<!DOCTYPE html>
 <html lang="en">
@@ -75,6 +109,13 @@ const html = `<!DOCTYPE html>
 </head>
 <body>
     <div class="container">
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="fellowship.html">Fellowship</a></li>
+            </ul>
+        </nav>
         <!-- Hero Section -->
         <section class="hero">
             <!-- Decorative network nodes -->
@@ -160,7 +201,52 @@ const html = `<!DOCTYPE html>
 </body>
 </html>`;
 
-// Write the generated HTML
+// Generate fellowship page HTML
+const fellowshipHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fellowship Page - AI for Epistemics & Coordination</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="fellowship.html" class="active">Fellowship</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Header -->
+        <header>
+            <div class="fellowship-header">
+                <h1 class="fellowship-title">FELLOWSHIP PAGE</h1>
+                <div class="header-line"></div>
+            </div>
+        </header>
+
+        <!-- Fellowship Description -->
+        <section class="fellowship-description-section">
+            <div class="main-content">
+                <div class="content">${fellowshipDescription.content}</div>
+            </div>
+        </section>
+
+        <!-- Fellows Grid -->
+        <section class="fellows-section">
+            <div class="fellows-grid">
+                ${generateFellows()}
+            </div>
+        </section>
+    </div>
+</body>
+</html>`;
+
+// Write the generated HTML files
 fs.writeFileSync(path.join(__dirname, 'index.html'), html);
-console.log('✅ Homepage generated successfully from markdown files!');
+fs.writeFileSync(path.join(__dirname, 'fellowship.html'), fellowshipHtml);
+console.log('✅ Homepage and fellowship page generated successfully from markdown files!');
 console.log('📝 Edit content in the content/ folder, then run "npm run build" to regenerate.');
