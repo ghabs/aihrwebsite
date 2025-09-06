@@ -35,6 +35,42 @@ function readFellows() {
     }).sort((a, b) => (a.order || 0) - (b.order || 0));
 }
 
+// Read research
+function readResearch() {
+    const researchDir = path.join(__dirname, 'content', 'research');
+    const researchFiles = fs.readdirSync(researchDir).filter(file => file.endsWith('.md'));
+    
+    const researchMap = {};
+    researchFiles.forEach(file => {
+        const researchContent = readContentFile(`research/${file}`);
+        const id = researchContent.frontmatter.id;
+        if (id) {
+            researchMap[id] = {
+                ...researchContent.frontmatter,
+                content: researchContent.content,
+                filename: file
+            };
+        }
+    });
+    
+    return researchMap;
+}
+
+// Read projects
+function readProjects() {
+    const projectsDir = path.join(__dirname, 'content', 'projects');
+    const projectFiles = fs.readdirSync(projectsDir).filter(file => file.endsWith('.md'));
+    
+    return projectFiles.map(file => {
+        const projectContent = readContentFile(`projects/${file}`);
+        return {
+            ...projectContent.frontmatter,
+            content: projectContent.content,
+            filename: file
+        };
+    }).sort((a, b) => (a.order || 0) - (b.order || 0));
+}
+
 // Load all content
 const hero = readContentFile('hero.md');
 const vision = readContentFile('vision.md');
@@ -42,6 +78,8 @@ const beaconProjects = readContentFile('beacon-projects.md');
 const fellowship = readContentFile('fellowship.md');
 const fellowshipDescription = readContentFile('fellowship-description.md');
 const fellows = readFellows();
+const projects = readProjects();
+const research = readResearch();
 
 // Icon mapping
 const iconSvgs = {
@@ -64,17 +102,38 @@ const networkNodeSvg = `<circle cx="12" cy="5" r="2"/>
                         <line x1="10.94" y1="13.06" x2="6.88" y2="17.12"/>
                         <line x1="13.06" y1="13.06" x2="17.12" y2="17.12"/>`;
 
-// Generate beacon projects HTML
+// Generate beacon projects HTML for homepage
 function generateBeaconProjects() {
-    const projects = beaconProjects.frontmatter.projects || [];
-    return projects.map(project => `
-        <a href="${project.link}" class="beacon-card">
+    const projectsData = beaconProjects.frontmatter.projects || [];
+    return projectsData.map(project => `
+        <a href="project-${project.link.replace('#', '')}.html" class="beacon-card">
             <div class="beacon-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     ${iconSvgs[project.icon] || ''}
                 </svg>
             </div>
             <h3>${project.title.replace(' ', '<br>')}</h3>
+            <p>${project.description}</p>
+        </a>
+    `).join('');
+}
+
+// Generate projects listing for projects page
+function generateProjectsListing() {
+    return projects.map(project => `
+        <a href="project-${project.slug}.html" class="project-card">
+            <div class="project-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1">
+                    <circle cx="20" cy="12" r="3" fill="currentColor"/>
+                    <circle cx="8" cy="28" r="3" fill="currentColor"/>
+                    <circle cx="32" cy="28" r="3" fill="currentColor"/>
+                    <circle cx="20" cy="20" r="4" fill="none"/>
+                    <line x1="20" y1="15" x2="20" y2="16"/>
+                    <line x1="17" y1="22" x2="11" y2="26"/>
+                    <line x1="23" y1="22" x2="29" y2="26"/>
+                </svg>
+            </div>
+            <h3>${project.title}</h3>
             <p>${project.description}</p>
         </a>
     `).join('');
@@ -113,6 +172,7 @@ const html = `<!DOCTYPE html>
         <nav class="main-nav">
             <ul>
                 <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
                 <li><a href="fellowship.html">Fellowship</a></li>
             </ul>
         </nav>
@@ -216,6 +276,7 @@ const fellowshipHtml = `<!DOCTYPE html>
         <nav class="main-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
                 <li><a href="fellowship.html" class="active">Fellowship</a></li>
             </ul>
         </nav>
@@ -245,8 +306,167 @@ const fellowshipHtml = `<!DOCTYPE html>
 </body>
 </html>`;
 
+// Generate projects listing page
+const projectsListingHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beacon Projects - AI for Epistemics & Coordination</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="fellowship.html">Fellowship</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Header -->
+        <header>
+            <div class="projects-header">
+                <h1 class="projects-title">BEACON PROJECTS</h1>
+                <div class="header-line"></div>
+            </div>
+        </header>
+
+        <!-- Projects Grid -->
+        <section class="projects-section">
+            <div class="projects-grid">
+                ${generateProjectsListing()}
+            </div>
+        </section>
+    </div>
+</body>
+</html>`;
+
+// Generate individual project pages
+function generateProjectPage(project) {
+    const foundationalCapabilities = project.foundational_capabilities || [];
+    const fellowshipResearchIds = project.fellowship_research || [];
+    
+    const capabilitiesHtml = foundationalCapabilities.map(cap => `
+        <div class="capability-card">
+            <h3>${cap.title}</h3>
+            <p>${cap.description}</p>
+        </div>
+    `).join('');
+    
+    const researchHtml = fellowshipResearchIds.map(researchId => {
+        const researchItem = research[researchId];
+        if (!researchItem) return '';
+        
+        return `
+        <div class="research-accordion-item">
+            <div class="research-header" onclick="toggleAccordion('${researchId}')">
+                <h4>${researchItem.title}</h4>
+                <p class="research-short-description">${researchItem.short_description}</p>
+                <div class="accordion-toggle">+</div>
+            </div>
+            <div class="research-content" id="research-${researchId}">
+                <div class="research-detail">
+                    ${researchItem.content}
+                </div>
+            </div>
+        </div>
+        `;
+    }).join('');
+    
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beacon Project: ${project.title} - AI for Epistemics & Coordination</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="fellowship.html">Fellowship</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Project Header -->
+        <section class="project-hero">
+            <div class="project-border">
+                <h1 class="project-title">BEACON PROJECT: ${project.title}</h1>
+                <p class="project-description">${project.description}</p>
+                <div class="project-diagram">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1">
+                        <circle cx="30" cy="18" r="4" fill="currentColor"/>
+                        <circle cx="15" cy="42" r="4" fill="currentColor"/>
+                        <circle cx="45" cy="42" r="4" fill="currentColor"/>
+                        <circle cx="30" cy="30" r="6" fill="none"/>
+                        <line x1="30" y1="22" x2="30" y2="24"/>
+                        <line x1="25" y1="33" x2="19" y2="39"/>
+                        <line x1="35" y1="33" x2="41" y2="39"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Foundational Capabilities -->
+        <section class="capabilities-section">
+            <h2 class="section-title">FOUNDATIONAL CAPABILITIES <span class="capability-count">(${foundationalCapabilities.length})</span></h2>
+            <div class="capabilities-grid">
+                ${capabilitiesHtml}
+            </div>
+        </section>
+
+        <!-- Fellowship Research -->
+        <section class="research-section">
+            <h2 class="section-title">FELLOWSHIP RESEARCH</h2>
+            <div class="research-accordion">
+                ${researchHtml}
+            </div>
+        </section>
+    </div>
+    
+    <script>
+    function toggleAccordion(researchId) {
+        const content = document.getElementById('research-' + researchId);
+        const toggle = event.target.closest('.research-header').querySelector('.accordion-toggle');
+        
+        if (content.style.display === 'block') {
+            content.style.display = 'none';
+            toggle.textContent = '+';
+        } else {
+            // Close all other accordions
+            const allContent = document.querySelectorAll('.research-content');
+            const allToggles = document.querySelectorAll('.accordion-toggle');
+            allContent.forEach(c => c.style.display = 'none');
+            allToggles.forEach(t => t.textContent = '+');
+            
+            // Open this one
+            content.style.display = 'block';
+            toggle.textContent = '−';
+        }
+    }
+    </script>
+</body>
+</html>`;
+}
+
 // Write the generated HTML files
 fs.writeFileSync(path.join(__dirname, 'index.html'), html);
 fs.writeFileSync(path.join(__dirname, 'fellowship.html'), fellowshipHtml);
-console.log('✅ Homepage and fellowship page generated successfully from markdown files!');
+fs.writeFileSync(path.join(__dirname, 'projects.html'), projectsListingHtml);
+
+// Generate individual project pages
+projects.forEach(project => {
+    const projectPageHtml = generateProjectPage(project);
+    fs.writeFileSync(path.join(__dirname, `project-${project.slug}.html`), projectPageHtml);
+});
+
+console.log('✅ All pages generated successfully from markdown files!');
+console.log(`📄 Generated: index.html, fellowship.html, projects.html, and ${projects.length} project pages`);
 console.log('📝 Edit content in the content/ folder, then run "npm run build" to regenerate.');

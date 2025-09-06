@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beacon Project: AI MEDIATION - AI for Epistemics & Coordination</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="fellowship.html">Fellowship</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Project Header -->
+        <section class="project-hero">
+            <div class="project-border">
+                <h1 class="project-title">BEACON PROJECT: AI MEDIATION</h1>
+                <p class="project-description">Understanding finelyith complexiy the son sqils intgraf facilities Me pendesting dus ko, empenhe and thorneyerry lace fint cratapan thordyent. We believe fem dotachon. EkA.N vfilalistals the tondestinion co pantet.</p>
+                <div class="project-diagram">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1">
+                        <circle cx="30" cy="18" r="4" fill="currentColor"/>
+                        <circle cx="15" cy="42" r="4" fill="currentColor"/>
+                        <circle cx="45" cy="42" r="4" fill="currentColor"/>
+                        <circle cx="30" cy="30" r="6" fill="none"/>
+                        <line x1="30" y1="22" x2="30" y2="24"/>
+                        <line x1="25" y1="33" x2="19" y2="39"/>
+                        <line x1="35" y1="33" x2="41" y2="39"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Foundational Capabilities -->
+        <section class="capabilities-section">
+            <h2 class="section-title">FOUNDATIONAL CAPABILITIES <span class="capability-count">(2)</span></h2>
+            <div class="capabilities-grid">
+                
+        <div class="capability-card">
+            <h3>LARGE-SCALE COORDINATION DENSE PLATFORM</h3>
+            <p>Develop a scalable technology din can to cell difcult properties.</p>
+        </div>
+    
+        <div class="capability-card">
+            <h3>EPSTEMIC AI AGENT INFRAUSSTRUCTURE</h3>
+            <p>Develop a scalable systematyat tax car fo cell difcult properties.</p>
+        </div>
+    
+            </div>
+        </section>
+
+        <!-- Fellowship Research -->
+        <section class="research-section">
+            <h2 class="section-title">FELLOWSHIP RESEARCH</h2>
+            <div class="research-accordion">
+                
+        <div class="research-accordion-item">
+            <div class="research-header" onclick="toggleAccordion('ai-mediation-study')">
+                <h4>Rodion & Company's AI Mediation Study</h4>
+                <p class="research-short-description">Redlapping this de pill Mediation Study emrerplan to hein ad dult land prvule.</p>
+                <div class="accordion-toggle">+</div>
+            </div>
+            <div class="research-content" id="research-ai-mediation-study">
+                <div class="research-detail">
+                    <h1>Detailed Research Overview</h1>
+<p>This comprehensive study explores the intersection of AI-powered mediation systems and human conflict resolution. The research investigates how artificial intelligence can be leveraged to facilitate more effective communication and understanding between parties in dispute.</p>
+<h2>Research Methodology</h2>
+<p>The study employs a mixed-methods approach combining:</p>
+<ul>
+<li><strong>Quantitative analysis</strong> of mediation success rates</li>
+<li><strong>Qualitative interviews</strong> with participants</li>
+<li><strong>Behavioral observation</strong> of AI-human interactions</li>
+<li><strong>Computational modeling</strong> of dialogue patterns</li>
+</ul>
+<h2>Key Findings</h2>
+<p>Initial results suggest that AI mediation tools can significantly improve:</p>
+<ol>
+<li><strong>Emotional regulation</strong> during heated discussions</li>
+<li><strong>Perspective-taking</strong> abilities of participants</li>
+<li><strong>Creative solution generation</strong> for complex problems</li>
+<li><strong>Long-term relationship preservation</strong> post-conflict</li>
+</ol>
+<h2>Implementation Framework</h2>
+<p>The research proposes a three-stage implementation framework:</p>
+<h3>Stage 1: Assessment &amp; Preparation</h3>
+<ul>
+<li>Pre-mediation analysis of conflict dynamics</li>
+<li>Stakeholder readiness evaluation</li>
+<li>AI system configuration</li>
+</ul>
+<h3>Stage 2: Active Mediation</h3>
+<ul>
+<li>Real-time emotional state monitoring</li>
+<li>Adaptive communication suggestions</li>
+<li>Bias detection and correction</li>
+</ul>
+<h3>Stage 3: Follow-up &amp; Learning</h3>
+<ul>
+<li>Post-mediation outcome tracking</li>
+<li>System performance analysis</li>
+<li>Continuous improvement integration</li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+        
+            </div>
+        </section>
+    </div>
+    
+    <script>
+    function toggleAccordion(researchId) {
+        const content = document.getElementById('research-' + researchId);
+        const toggle = event.target.closest('.research-header').querySelector('.accordion-toggle');
+        
+        if (content.style.display === 'block') {
+            content.style.display = 'none';
+            toggle.textContent = '+';
+        } else {
+            // Close all other accordions
+            const allContent = document.querySelectorAll('.research-content');
+            const allToggles = document.querySelectorAll('.accordion-toggle');
+            allContent.forEach(c => c.style.display = 'none');
+            allToggles.forEach(t => t.textContent = '+');
+            
+            // Open this one
+            content.style.display = 'block';
+            toggle.textContent = '−';
+        }
+    }
+    </script>
+</body>
+</html>
