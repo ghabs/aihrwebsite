@@ -56,6 +56,21 @@ function readResearch() {
     return researchMap;
 }
 
+// Read theory sections
+function readTheorySections() {
+    const theoryDir = path.join(__dirname, 'content', 'theory');
+    const theoryFiles = fs.readdirSync(theoryDir).filter(file => file.endsWith('.md'));
+    
+    return theoryFiles.map(file => {
+        const theoryContent = readContentFile(`theory/${file}`);
+        return {
+            ...theoryContent.frontmatter,
+            content: theoryContent.content,
+            filename: file
+        };
+    }).sort((a, b) => (a.order || 0) - (b.order || 0));
+}
+
 // Read projects
 function readProjects() {
     const projectsDir = path.join(__dirname, 'content', 'projects');
@@ -77,9 +92,11 @@ const vision = readContentFile('vision.md');
 const beaconProjects = readContentFile('beacon-projects.md');
 const fellowship = readContentFile('fellowship.md');
 const fellowshipDescription = readContentFile('fellowship-description.md');
+const theory = readContentFile('theory.md');
 const fellows = readFellows();
 const projects = readProjects();
 const research = readResearch();
+const theorySections = readTheorySections();
 
 // Icon mapping
 const iconSvgs = {
@@ -174,6 +191,7 @@ const html = `<!DOCTYPE html>
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="fellowship.html">Fellowship</a></li>
+                <li><a href="theory.html">Theory</a></li>
             </ul>
         </nav>
         <!-- Hero Section -->
@@ -205,7 +223,7 @@ const html = `<!DOCTYPE html>
             <p class="hero-subtitle">
                 ${hero.frontmatter.subtitle}
             </p>
-            <a href="${hero.frontmatter.cta_link}" class="btn">${hero.frontmatter.cta_text}</a>
+            <a href="theory.html" class="btn">${hero.frontmatter.cta_text}</a>
         </section>
 
         <!-- Vision Section -->
@@ -278,6 +296,7 @@ const fellowshipHtml = `<!DOCTYPE html>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="fellowship.html" class="active">Fellowship</a></li>
+                <li><a href="theory.html">Theory</a></li>
             </ul>
         </nav>
         
@@ -323,6 +342,7 @@ const projectsListingHtml = `<!DOCTYPE html>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html" class="active">Projects</a></li>
                 <li><a href="fellowship.html">Fellowship</a></li>
+                <li><a href="theory.html">Theory</a></li>
             </ul>
         </nav>
         
@@ -392,6 +412,7 @@ function generateProjectPage(project) {
                 <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html" class="active">Projects</a></li>
                 <li><a href="fellowship.html">Fellowship</a></li>
+                <li><a href="theory.html">Theory</a></li>
             </ul>
         </nav>
         
@@ -456,10 +477,332 @@ function generateProjectPage(project) {
 </html>`;
 }
 
+// Theory page diagrams
+const theoryDiagrams = {
+    'improved-coordination': `
+        <svg width="300" height="150" viewBox="0 0 300 150" fill="none" stroke="currentColor" stroke-width="1">
+            <!-- Left cluster -->
+            <circle cx="40" cy="40" r="3" fill="currentColor"/>
+            <circle cx="25" cy="55" r="3" fill="currentColor"/>
+            <circle cx="55" cy="55" r="3" fill="currentColor"/>
+            <circle cx="40" cy="70" r="3" fill="currentColor"/>
+            <circle cx="20" cy="75" r="3" fill="currentColor"/>
+            <circle cx="60" cy="75" r="3" fill="currentColor"/>
+            
+            <!-- Left cluster connections -->
+            <line x1="40" y1="40" x2="25" y2="55"/>
+            <line x1="40" y1="40" x2="55" y2="55"/>
+            <line x1="25" y1="55" x2="40" y2="70"/>
+            <line x1="55" y1="55" x2="40" y2="70"/>
+            <line x1="40" y1="70" x2="20" y2="75"/>
+            <line x1="40" y1="70" x2="60" y2="75"/>
+            <line x1="25" y1="55" x2="20" y2="75"/>
+            <line x1="55" y1="55" x2="60" y2="75"/>
+            
+            <!-- Bridge connections -->
+            <line x1="60" y1="75" x2="120" y2="75"/>
+            <line x1="55" y1="55" x2="135" y2="55"/>
+            <line x1="40" y1="40" x2="150" y2="40"/>
+            <line x1="40" y1="70" x2="150" y2="70"/>
+            <line x1="25" y1="55" x2="120" y2="55"/>
+            <line x1="20" y1="75" x2="110" y2="75"/>
+            
+            <!-- Bridge structure -->
+            <line x1="110" y1="30" x2="110" y2="90"/>
+            <line x1="120" y1="35" x2="120" y2="85"/>
+            <line x1="130" y1="30" x2="130" y2="90"/>
+            <line x1="140" y1="35" x2="140" y2="85"/>
+            <line x1="150" y1="30" x2="150" y2="90"/>
+            <line x1="160" y1="35" x2="160" y2="85"/>
+            <line x1="170" y1="30" x2="170" y2="90"/>
+            <line x1="180" y1="35" x2="180" y2="85"/>
+            <line x1="190" y1="30" x2="190" y2="90"/>
+            
+            <!-- Bridge cross-connections -->
+            <line x1="110" y1="60" x2="190" y2="60"/>
+            <line x1="120" y1="50" x2="180" y2="70"/>
+            <line x1="130" y1="45" x2="170" y2="75"/>
+            <line x1="140" y1="40" x2="160" y2="80"/>
+            
+            <!-- Right cluster connections from bridge -->
+            <line x1="190" y1="30" x2="240" y2="40"/>
+            <line x1="180" y1="35" x2="225" y2="55"/>
+            <line x1="170" y1="30" x2="255" y2="55"/>
+            <line x1="160" y1="35" x2="240" y2="70"/>
+            <line x1="190" y1="90" x2="260" y2="75"/>
+            <line x1="180" y1="85" x2="220" y2="75"/>
+            
+            <!-- Right cluster -->
+            <circle cx="240" cy="40" r="3" fill="currentColor"/>
+            <circle cx="225" cy="55" r="3" fill="currentColor"/>
+            <circle cx="255" cy="55" r="3" fill="currentColor"/>
+            <circle cx="240" cy="70" r="3" fill="currentColor"/>
+            <circle cx="220" cy="75" r="3" fill="currentColor"/>
+            <circle cx="260" cy="75" r="3" fill="currentColor"/>
+            
+            <!-- Right cluster connections -->
+            <line x1="240" y1="40" x2="225" y2="55"/>
+            <line x1="240" y1="40" x2="255" y2="55"/>
+            <line x1="225" y1="55" x2="240" y2="70"/>
+            <line x1="255" y1="55" x2="240" y2="70"/>
+            <line x1="240" y1="70" x2="220" y2="75"/>
+            <line x1="240" y1="70" x2="260" y2="75"/>
+            <line x1="225" y1="55" x2="220" y2="75"/>
+            <line x1="255" y1="55" x2="260" y2="75"/>
+        </svg>`,
+    
+    'augmented-decision-making': `
+        <svg width="400" height="300" viewBox="0 0 400 300" fill="none" stroke="currentColor" stroke-width="1">
+            <!-- Complex network with dense left cluster -->
+            <g opacity="0.7">
+                <!-- Dense cluster nodes -->
+                <circle cx="50" cy="50" r="2" fill="currentColor"/>
+                <circle cx="45" cy="65" r="2" fill="currentColor"/>
+                <circle cx="35" cy="80" r="2" fill="currentColor"/>
+                <circle cx="65" cy="75" r="2" fill="currentColor"/>
+                <circle cx="80" cy="60" r="2" fill="currentColor"/>
+                <circle cx="25" cy="95" r="2" fill="currentColor"/>
+                <circle cx="70" cy="95" r="2" fill="currentColor"/>
+                <circle cx="30" cy="110" r="2" fill="currentColor"/>
+                <circle cx="55" cy="105" r="2" fill="currentColor"/>
+                <circle cx="75" cy="120" r="2" fill="currentColor"/>
+                <circle cx="40" cy="125" r="2" fill="currentColor"/>
+                <circle cx="60" cy="135" r="2" fill="currentColor"/>
+                <circle cx="85" cy="140" r="2" fill="currentColor"/>
+                <circle cx="20" cy="130" r="2" fill="currentColor"/>
+                <circle cx="90" cy="80" r="2" fill="currentColor"/>
+                <circle cx="100" cy="100" r="2" fill="currentColor"/>
+                <circle cx="15" cy="70" r="2" fill="currentColor"/>
+                <circle cx="95" cy="115" r="2" fill="currentColor"/>
+                
+                <!-- Many connections creating dense network -->
+                <line x1="50" y1="50" x2="45" y2="65"/>
+                <line x1="50" y1="50" x2="80" y2="60"/>
+                <line x1="45" y1="65" x2="35" y2="80"/>
+                <line x1="45" y1="65" x2="65" y2="75"/>
+                <line x1="35" y1="80" x2="25" y2="95"/>
+                <line x1="65" y1="75" x2="80" y2="60"/>
+                <line x1="65" y1="75" x2="70" y2="95"/>
+                <line x1="80" y1="60" x2="90" y2="80"/>
+                <line x1="25" y1="95" x2="30" y2="110"/>
+                <line x1="70" y1="95" x2="55" y2="105"/>
+                <line x1="30" y1="110" x2="40" y2="125"/>
+                <line x1="55" y1="105" x2="75" y2="120"/>
+                <line x1="75" y1="120" x2="85" y2="140"/>
+                <line x1="40" y1="125" x2="60" y2="135"/>
+                <line x1="60" y1="135" x2="85" y2="140"/>
+                <line x1="20" y1="130" x2="40" y2="125"/>
+                <line x1="90" y1="80" x2="100" y2="100"/>
+                <line x1="100" y1="100" x2="95" y2="115"/>
+                <line x1="15" y1="70" x2="35" y2="80"/>
+                <line x1="95" y1="115" x2="75" y2="120"/>
+                
+                <!-- Additional cross connections for density -->
+                <line x1="50" y1="50" x2="35" y2="80"/>
+                <line x1="45" y1="65" x2="80" y2="60"/>
+                <line x1="35" y1="80" x2="70" y2="95"/>
+                <line x1="25" y1="95" x2="55" y2="105"/>
+                <line x1="30" y1="110" x2="75" y2="120"/>
+                <line x1="40" y1="125" x2="85" y2="140"/>
+                <line x1="15" y1="70" x2="65" y2="75"/>
+                <line x1="90" y1="80" x2="70" y2="95"/>
+            </g>
+            
+            <!-- Central processing node (geometric shape) -->
+            <g transform="translate(220,150)">
+                <!-- Octagonal shape -->
+                <polygon points="0,-30 20,-20 30,0 20,20 0,30 -20,20 -30,0 -20,-20" 
+                         fill="none" stroke="currentColor" stroke-width="2"/>
+                <!-- Inner connections -->
+                <line x1="0" y1="-30" x2="0" y2="30" stroke-width="1"/>
+                <line x1="-30" y1="0" x2="30" y2="0" stroke-width="1"/>
+                <line x1="-20" y1="-20" x2="20" y2="20" stroke-width="1"/>
+                <line x1="20" y1="-20" x2="-20" y2="20" stroke-width="1"/>
+                <!-- Small center node -->
+                <circle cx="0" cy="0" r="3" fill="currentColor"/>
+            </g>
+            
+            <!-- Connections from cluster to central node -->
+            <line x1="100" y1="100" x2="190" y2="140"/>
+            <line x1="95" y1="115" x2="190" y2="150"/>
+            <line x1="85" y1="140" x2="190" y2="160"/>
+            <line x1="75" y1="120" x2="190" y2="155"/>
+            <line x1="90" y1="80" x2="200" y2="130"/>
+            <line x1="80" y1="60" x2="205" y2="125"/>
+            <line x1="70" y1="95" x2="195" y2="145"/>
+            
+            <!-- Output connections (linear chain) -->
+            <circle cx="280" cy="150" r="3" fill="currentColor"/>
+            <circle cx="300" cy="150" r="3" fill="currentColor"/>
+            <circle cx="320" cy="150" r="3" fill="currentColor"/>
+            <circle cx="340" cy="150" r="3" fill="currentColor"/>
+            <circle cx="360" cy="150" r="3" fill="currentColor"/>
+            <circle cx="380" cy="150" r="3" fill="currentColor"/>
+            
+            <line x1="250" y1="150" x2="280" y2="150"/>
+            <line x1="280" y1="150" x2="300" y2="150"/>
+            <line x1="300" y1="150" x2="320" y2="150"/>
+            <line x1="320" y1="150" x2="340" y2="150"/>
+            <line x1="340" y1="150" x2="360" y2="150"/>
+            <line x1="360" y1="150" x2="380" y2="150"/>
+        </svg>`,
+    
+    'collective-epistemics': `
+        <svg width="400" height="300" viewBox="0 0 400 300" fill="none" stroke="currentColor" stroke-width="1">
+            <!-- Scattered nodes representing diverse knowledge sources -->
+            <circle cx="50" cy="50" r="3"/>
+            <circle cx="120" cy="40" r="3"/>
+            <circle cx="90" cy="80" r="3"/>
+            <circle cx="180" cy="30" r="3"/>
+            <circle cx="220" cy="70" r="3"/>
+            <circle cx="350" cy="60" r="3"/>
+            <circle cx="30" cy="120" r="3"/>
+            <circle cx="80" cy="140" r="3"/>
+            <circle cx="160" cy="100" r="3"/>
+            <circle cx="300" cy="90" r="3"/>
+            <circle cx="370" cy="120" r="3"/>
+            <circle cx="40" cy="180" r="3"/>
+            <circle cx="110" cy="200" r="3"/>
+            <circle cx="200" cy="180" r="3"/>
+            <circle cx="280" cy="200" r="3"/>
+            <circle cx="340" cy="180" r="3"/>
+            <circle cx="60" cy="240" r="3"/>
+            <circle cx="150" cy="250" r="3"/>
+            <circle cx="250" cy="240" r="3"/>
+            <circle cx="320" cy="260" r="3"/>
+            
+            <!-- Fill some circles to show different types -->
+            <circle cx="50" cy="50" r="3" fill="currentColor"/>
+            <circle cx="180" cy="30" r="3" fill="currentColor"/>
+            <circle cx="220" cy="70" r="3" fill="currentColor"/>
+            <circle cx="160" cy="100" r="3" fill="currentColor"/>
+            <circle cx="200" cy="180" r="3" fill="currentColor"/>
+            <circle cx="250" cy="240" r="3" fill="currentColor"/>
+            
+            <!-- Central coordination cluster -->
+            <g transform="translate(200,150)">
+                <!-- Central nodes in coordination pattern -->
+                <circle cx="0" cy="0" r="4" fill="none" stroke-width="2"/>
+                <circle cx="-15" cy="-10" r="3"/>
+                <circle cx="15" cy="-10" r="3"/>
+                <circle cx="-10" cy="12" r="3"/>
+                <circle cx="10" cy="12" r="3"/>
+                <circle cx="0" cy="-20" r="3"/>
+                <circle cx="0" cy="20" r="3"/>
+                
+                <!-- Central cluster connections -->
+                <line x1="0" y1="0" x2="-15" y2="-10"/>
+                <line x1="0" y1="0" x2="15" y2="-10"/>
+                <line x1="0" y1="0" x2="-10" y2="12"/>
+                <line x1="0" y1="0" x2="10" y2="12"/>
+                <line x1="0" y1="0" x2="0" y2="-20"/>
+                <line x1="0" y1="0" x2="0" y2="20"/>
+                <line x1="-15" y1="-10" x2="15" y2="-10"/>
+                <line x1="-10" y1="12" x2="10" y2="12"/>
+            </g>
+            
+            <!-- Connections from scattered nodes to central coordination -->
+            <line x1="50" y1="50" x2="185" y2="140"/>
+            <line x1="120" y1="40" x2="190" y2="130"/>
+            <line x1="180" y1="30" x2="200" y2="130"/>
+            <line x1="350" y1="60" x2="215" y2="140"/>
+            <line x1="30" y1="120" x2="185" y2="150"/>
+            <line x1="160" y1="100" x2="200" y2="140"/>
+            <line x1="370" y1="120" x2="210" y2="155"/>
+            <line x1="40" y1="180" x2="185" y2="160"/>
+            <line x1="200" y1="180" x2="200" y2="170"/>
+            <line x1="340" y1="180" x2="215" y2="160"/>
+            <line x1="150" y1="250" x2="195" y2="170"/>
+            <line x1="250" y1="240" x2="205" y2="170"/>
+            
+            <!-- Additional peripheral connections -->
+            <circle cx="80" cy="20" r="2"/>
+            <circle cx="300" cy="40" r="2"/>
+            <circle cx="20" cy="200" r="2"/>
+            <circle cx="380" cy="200" r="2"/>
+            <circle cx="100" cy="280" r="2"/>
+            <circle cx="300" cy="280" r="2"/>
+            
+            <!-- Small peripheral clusters -->
+            <g transform="translate(320,30)">
+                <circle cx="0" cy="0" r="2"/>
+                <circle cx="8" cy="5" r="2"/>
+                <circle cx="-5" cy="8" r="2"/>
+                <line x1="0" y1="0" x2="8" y2="5"/>
+                <line x1="0" y1="0" x2="-5" y2="8"/>
+            </g>
+            
+            <g transform="translate(70,270)">
+                <circle cx="0" cy="0" r="2"/>
+                <circle cx="-8" cy="-5" r="2"/>
+                <circle cx="5" cy="-8" r="2"/>
+                <line x1="0" y1="0" x2="-8" y2="-5"/>
+                <line x1="0" y1="0" x2="5" y2="-8"/>
+            </g>
+        </svg>`
+};
+
+// Generate theory page
+const theoryHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theory - AI for Epistemics & Coordination</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="fellowship.html">Fellowship</a></li>
+                <li><a href="theory.html" class="active">Theory</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Theory Header -->
+        <header class="theory-header">
+            <h1 class="theory-title">${theory.frontmatter.title}</h1>
+            <p class="theory-description">${theory.frontmatter.description}</p>
+        </header>
+
+        <!-- Theory Introduction -->
+        <section class="theory-intro">
+            <div class="theory-content">
+                ${theory.content}
+            </div>
+        </section>
+
+        <!-- Theory Sections -->
+        ${theorySections.map(section => `
+            <section class="theory-section" id="${section.id}">
+                <div class="theory-section-content">
+                    <div class="theory-text">
+                        <div class="theory-section-body">
+                            ${section.content}
+                        </div>
+                    </div>
+                    <div class="theory-diagram">
+                        <div class="diagram-container">
+                            ${theoryDiagrams[section.id] || ''}
+                            <h3 class="diagram-label">${section.title}</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `).join('')}
+    </div>
+</body>
+</html>`;
+
 // Write the generated HTML files
 fs.writeFileSync(path.join(__dirname, 'index.html'), html);
 fs.writeFileSync(path.join(__dirname, 'fellowship.html'), fellowshipHtml);
 fs.writeFileSync(path.join(__dirname, 'projects.html'), projectsListingHtml);
+fs.writeFileSync(path.join(__dirname, 'theory.html'), theoryHtml);
 
 // Generate individual project pages
 projects.forEach(project => {

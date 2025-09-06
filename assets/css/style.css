@@ -685,6 +685,181 @@ footer {
     }
 }
 
+/* Theory Page */
+.theory-header {
+    text-align: center;
+    padding: 3rem 0;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 3rem;
+}
+
+.theory-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.theory-description {
+    font-size: 1.2rem;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.theory-intro {
+    margin-bottom: 4rem;
+}
+
+.theory-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.theory-content h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.theory-content h2 {
+    font-size: 1.5rem;
+    margin: 2.5rem 0 1.5rem 0;
+    font-weight: 600;
+}
+
+.theory-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    max-width: none;
+}
+
+.theory-section {
+    margin-bottom: 6rem;
+    padding: 2rem 0;
+}
+
+.theory-section-content {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 4rem;
+    align-items: start;
+}
+
+.theory-text {
+    max-width: none;
+}
+
+.theory-section-body {
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.theory-section-body h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.theory-section-body h2 {
+    font-size: 1.4rem;
+    margin: 2rem 0 1rem 0;
+    font-weight: 600;
+}
+
+.theory-section-body h3 {
+    font-size: 1.2rem;
+    margin: 1.5rem 0 0.8rem 0;
+    font-weight: 600;
+}
+
+.theory-section-body p {
+    margin-bottom: 1.5rem;
+    max-width: none;
+}
+
+.theory-section-body ul, .theory-section-body ol {
+    margin: 1rem 0 1.5rem 2rem;
+}
+
+.theory-section-body li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.theory-section-body strong {
+    font-weight: 600;
+}
+
+.theory-diagram {
+    position: sticky;
+    top: 2rem;
+}
+
+.diagram-container {
+    text-align: center;
+    padding: 2rem;
+    border: 2px solid #000;
+    background: #f9f9f9;
+}
+
+.diagram-container svg {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.diagram-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+/* Responsive Design for Theory Page */
+@media (max-width: 1024px) {
+    .theory-section-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .theory-diagram {
+        position: static;
+        order: -1;
+    }
+    
+    .diagram-container {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .theory-title {
+        font-size: 2rem;
+    }
+    
+    .theory-description {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .theory-content {
+        padding: 0 1rem;
+    }
+    
+    .diagram-container {
+        padding: 1rem;
+    }
+    
+    .diagram-container svg {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
 /* Link Styles */
 a {
     color: #000;
