@@ -798,18 +798,43 @@ const theoryHtml = `<!DOCTYPE html>
 </body>
 </html>`;
 
-// Write the generated HTML files
-fs.writeFileSync(path.join(__dirname, 'index.html'), html);
-fs.writeFileSync(path.join(__dirname, 'fellowship.html'), fellowshipHtml);
-fs.writeFileSync(path.join(__dirname, 'projects.html'), projectsListingHtml);
-fs.writeFileSync(path.join(__dirname, 'theory.html'), theoryHtml);
+// Create output directory
+const outputDir = path.join(__dirname, 'dist');
+if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+}
+
+// Copy assets to output directory
+const assetsDir = path.join(outputDir, 'assets');
+if (!fs.existsSync(assetsDir)) {
+    fs.mkdirSync(assetsDir, { recursive: true });
+}
+
+// Copy CSS files
+const cssDir = path.join(assetsDir, 'css');
+if (!fs.existsSync(cssDir)) {
+    fs.mkdirSync(cssDir, { recursive: true });
+}
+
+fs.copyFileSync(
+    path.join(__dirname, 'assets', 'css', 'style.css'), 
+    path.join(cssDir, 'style.css')
+);
+
+// Write the generated HTML files to output directory
+fs.writeFileSync(path.join(outputDir, 'index.html'), html);
+fs.writeFileSync(path.join(outputDir, 'fellowship.html'), fellowshipHtml);
+fs.writeFileSync(path.join(outputDir, 'projects.html'), projectsListingHtml);
+fs.writeFileSync(path.join(outputDir, 'theory.html'), theoryHtml);
 
 // Generate individual project pages
 projects.forEach(project => {
     const projectPageHtml = generateProjectPage(project);
-    fs.writeFileSync(path.join(__dirname, `project-${project.slug}.html`), projectPageHtml);
+    fs.writeFileSync(path.join(outputDir, `project-${project.slug}.html`), projectPageHtml);
 });
 
 console.log('✅ All pages generated successfully from markdown files!');
-console.log(`📄 Generated: index.html, fellowship.html, projects.html, and ${projects.length} project pages`);
+console.log(`📄 Generated: index.html, fellowship.html, projects.html, theory.html, and ${projects.length} project pages`);
+console.log(`📁 Output directory: ${outputDir}`);
+console.log('🚀 Ready for deployment! Drag the "dist" folder to Netlify.');
 console.log('📝 Edit content in the content/ folder, then run "npm run build" to regenerate.');
