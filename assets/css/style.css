@@ -425,6 +425,90 @@ footer {
     transform: translateY(-1px);
 }
 
+.fellows-header {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 3rem 0 2rem 0;
+    color: #000;
+}
+
+/* Mailing List Section */
+.mailing-list-section {
+    background-color: #f8f8f8;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.mailing-list-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.mailing-list-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #666;
+    max-width: none;
+}
+
+.mailing-list-form {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+}
+
+.form-group {
+    display: flex;
+    border: 2px solid #000;
+    background: #fff;
+    max-width: 500px;
+    width: 100%;
+}
+
+.email-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    background: transparent;
+    outline: none;
+}
+
+.email-input::placeholder {
+    color: #999;
+}
+
+.subscribe-btn {
+    border-left: 2px solid #000;
+    margin: 0;
+    border-radius: 0;
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .form-group {
+        flex-direction: column;
+        max-width: 350px;
+    }
+    
+    .subscribe-btn {
+        border-left: none;
+        border-top: 2px solid #000;
+    }
+    
+    .mailing-list-content p {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+}
+
 /* Responsive Design for Fellowship */
 @media (max-width: 768px) {
     .fellows-grid {

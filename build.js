@@ -198,8 +198,7 @@ const html = `<!DOCTYPE html>
         <!-- Navigation -->
         <nav class="main-nav">
             <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="fellowship.html">Fellowship</a></li>
+                <li><a href="index.html" class="active">Fellowship</a></li>
                 <li><a href="theory.html">Theory</a></li>
             </ul>
         </nav>
@@ -245,24 +244,8 @@ const html = `<!DOCTYPE html>
                     </div>
                 </div>
                 <div>
-                    <div style="text-align: right; margin-top: 2rem;">
-                        <svg width="120" height="80" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1">
-                            <circle cx="20" cy="20" r="3" fill="currentColor"/>
-                            <circle cx="60" cy="15" r="3" fill="currentColor"/>
-                            <circle cx="100" cy="25" r="3" fill="currentColor"/>
-                            <circle cx="30" cy="45" r="3" fill="currentColor"/>
-                            <circle cx="80" cy="40" r="3" fill="currentColor"/>
-                            <circle cx="50" cy="65" r="3" fill="currentColor"/>
-                            <line x1="20" y1="20" x2="60" y2="15"/>
-                            <line x1="60" y1="15" x2="100" y2="25"/>
-                            <line x1="20" y1="20" x2="30" y2="45"/>
-                            <line x1="60" y1="15" x2="80" y2="40"/>
-                            <line x1="30" y1="45" x2="50" y2="65"/>
-                            <line x1="80" y1="40" x2="50" y2="65"/>
-                            <text x="95" y="70" font-size="12" fill="currentColor">field of knowledge</text>
-                            <text x="10" y="75" font-size="12" fill="currentColor">?</text>
-                            <text x="110" y="50" font-size="12" fill="currentColor">?</text>
-                        </svg>
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <img src="assets/images/vision-diagram.png" alt="Vision diagram showing complex coordination networks" style="max-width: 100%; height: auto; margin-top: 50px;">
                     </div>
                 </div>
             </div>
@@ -275,9 +258,28 @@ const html = `<!DOCTYPE html>
                 <div class="content">${fellowship.content}</div>
             </div>
 
+            <!-- Fellows Header -->
+            <h3 class="fellows-header">FELLOWS</h3>
+
             <!-- Fellows Grid -->
             <div class="fellows-grid">
                 ${generateFellows()}
+            </div>
+        </section>
+
+        <!-- Mailing List Section -->
+        <section class="section mailing-list-section">
+            <div class="main-content">
+                <h2 class="section-title">STAY UPDATED</h2>
+                <div class="mailing-list-content">
+                    <p>Subscribe to our mailing list to receive updates on fellowship activities, research progress, and new opportunities in AI for epistemics and coordination.</p>
+                    <form class="mailing-list-form" action="#" method="post">
+                        <div class="form-group">
+                            <input type="email" placeholder="Enter your email address" required class="email-input">
+                            <button type="submit" class="btn subscribe-btn">SUBSCRIBE</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </section>
 
@@ -834,18 +836,41 @@ const theoryHtml = `<!DOCTYPE html>
         <!-- Navigation -->
         <nav class="main-nav">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="fellowship.html">Fellowship</a></li>
+                <li><a href="index.html">Fellowship</a></li>
                 <li><a href="theory.html" class="active">Theory</a></li>
             </ul>
         </nav>
         
-        <!-- Theory Header -->
-        <header class="theory-header">
-            <h1 class="theory-title">${theory.frontmatter.title}</h1>
-            <p class="theory-description">${theory.frontmatter.description}</p>
-        </header>
+        <!-- Theory Hero Section -->
+        <section class="hero">
+            <!-- Decorative network nodes -->
+            <div class="hero-decorations top-left">
+                <div class="network-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        ${networkNodeSvg}
+                    </svg>
+                </div>
+            </div>
+            <div class="hero-decorations top-right">
+                <div class="network-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        ${networkNodeSvg}
+                    </svg>
+                </div>
+            </div>
+            <div class="hero-decorations bottom-right">
+                <div class="network-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        ${networkNodeSvg}
+                    </svg>
+                </div>
+            </div>
+
+            <h1 class="hero-title">${theory.frontmatter.title}</h1>
+            <p class="hero-subtitle">
+                ${theory.frontmatter.description}
+            </p>
+        </section>
 
         <!-- Theory Introduction -->
         <section class="theory-intro">
@@ -898,6 +923,24 @@ fs.copyFileSync(
     path.join(__dirname, 'assets', 'css', 'style.css'), 
     path.join(cssDir, 'style.css')
 );
+
+// Copy image files
+const imagesDir = path.join(assetsDir, 'images');
+if (!fs.existsSync(imagesDir)) {
+    fs.mkdirSync(imagesDir, { recursive: true });
+}
+
+// Copy all images from assets/images to dist/assets/images
+const assetsImagesPath = path.join(__dirname, 'assets', 'images');
+if (fs.existsSync(assetsImagesPath)) {
+    const imageFiles = fs.readdirSync(assetsImagesPath);
+    imageFiles.forEach(file => {
+        fs.copyFileSync(
+            path.join(assetsImagesPath, file),
+            path.join(imagesDir, file)
+        );
+    });
+}
 
 // Write the generated HTML files to output directory
 fs.writeFileSync(path.join(outputDir, 'index.html'), html);
