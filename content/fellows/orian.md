@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Orian"
+description: "Intelligent agents facilitating coordination"
+order: 21
 ---
 
-# Callion
+# Orian
 
-Shoels slirtf mitees dre fouclolng
+Intelligent agents facilitating coordination
 
 ## Research Focus
 

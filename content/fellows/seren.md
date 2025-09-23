@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Seren"
+description: "Information systems connecting communities"
+order: 25
 ---
 
-# Callion
+# Seren
 
-Shoels slirtf mitees dre fouclolng
+Information systems connecting communities
 
 ## Research Focus
 

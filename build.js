@@ -158,8 +158,17 @@ function generateProjectsListing() {
 
 // Generate fellows HTML
 function generateFellows() {
-    return fellows.map(fellow => `
-        <div class="fellow-card">
+    return fellows.map((fellow, index) => {
+        // Read the full fellow content for the modal
+        const fellowContent = readContentFile(`fellows/${fellow.filename}`);
+        const fellowData = {
+            name: fellow.name,
+            description: fellow.description,
+            content: fellowContent.content
+        };
+        
+        return `
+        <div class="fellow-card" onclick="openFellowModal(${index})" data-fellow-index="${index}">
             <div class="fellow-portrait">
                 <div class="portrait-placeholder">
                     <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
@@ -171,7 +180,8 @@ function generateFellows() {
             <h3 class="fellow-name">${fellow.name}</h3>
             <p class="fellow-description">${fellow.description}</p>
         </div>
-    `).join('');
+    `;
+    }).join('');
 }
 
 // Generate HTML
@@ -189,7 +199,6 @@ const html = `<!DOCTYPE html>
         <nav class="main-nav">
             <ul>
                 <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
                 <li><a href="fellowship.html">Fellowship</a></li>
                 <li><a href="theory.html">Theory</a></li>
             </ul>
@@ -223,7 +232,6 @@ const html = `<!DOCTYPE html>
             <p class="hero-subtitle">
                 ${hero.frontmatter.subtitle}
             </p>
-            <a href="theory.html" class="btn">${hero.frontmatter.cta_text}</a>
         </section>
 
         <!-- Vision Section -->
@@ -232,6 +240,9 @@ const html = `<!DOCTYPE html>
                 <div>
                     <h2>${vision.frontmatter.title}</h2>
                     <div class="content">${vision.content}</div>
+                    <div style="margin-top: 2rem;">
+                        <a href="theory.html" class="btn-outline">MORE ON THE THEORY</a>
+                    </div>
                 </div>
                 <div>
                     <div style="text-align: right; margin-top: 2rem;">
@@ -257,25 +268,92 @@ const html = `<!DOCTYPE html>
             </div>
         </section>
 
-        <!-- Beacon Projects Section -->
-        <section class="section">
-            <h2 class="section-title">${beaconProjects.frontmatter.title}</h2>
-            <div class="beacon-grid">
-                ${generateBeaconProjects()}
-            </div>
-        </section>
-
         <!-- Fellowship Section -->
-        <section class="section">
+        <section class="section" id="fellowship">
             <h2 class="section-title">${fellowship.frontmatter.title}</h2>
             <div class="main-content">
                 <div class="content">${fellowship.content}</div>
-                <div style="margin-top: 2rem;">
-                    <a href="${fellowship.frontmatter.cta_link}" class="btn-outline">${fellowship.frontmatter.cta_text}</a>
-                </div>
+            </div>
+
+            <!-- Fellows Grid -->
+            <div class="fellows-grid">
+                ${generateFellows()}
             </div>
         </section>
+
+        <!-- Fellow Modal -->
+        <div id="fellowModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalFellowName"></h2>
+                    <span class="modal-close" onclick="closeFellowModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p id="modalFellowDescription"></p>
+                    <div id="modalFellowContent"></div>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="previousFellow()" id="prevBtn">← Previous Fellow</button>
+                    <button onclick="nextFellow()" id="nextBtn">Next Fellow →</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Fellow data for modal
+        const fellowsData = ${JSON.stringify(fellows.map(fellow => {
+            const fellowContent = readContentFile(`fellows/${fellow.filename}`);
+            return {
+                name: fellow.name,
+                description: fellow.description,
+                content: fellowContent.content
+            };
+        }))};
+
+        let currentFellowIndex = 0;
+
+        function openFellowModal(index) {
+            currentFellowIndex = index;
+            const fellow = fellowsData[index];
+            
+            document.getElementById('modalFellowName').textContent = fellow.name;
+            document.getElementById('modalFellowDescription').textContent = fellow.description;
+            document.getElementById('modalFellowContent').innerHTML = fellow.content;
+            document.getElementById('fellowModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFellowModal() {
+            document.getElementById('fellowModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function nextFellow() {
+            const nextIndex = (currentFellowIndex + 1) % fellowsData.length;
+            openFellowModal(nextIndex);
+        }
+
+        function previousFellow() {
+            const prevIndex = currentFellowIndex === 0 ? fellowsData.length - 1 : currentFellowIndex - 1;
+            openFellowModal(prevIndex);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('fellowModal');
+            if (event.target === modal) {
+                closeFellowModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeFellowModal();
+            }
+        });
+    </script>
 </body>
 </html>`;
 

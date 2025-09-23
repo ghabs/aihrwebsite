@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Lyron"
+description: "Algorithmic approaches discovering truths"
+order: 18
 ---
 
-# Callion
+# Lyron
 
-Shoels slirtf mitees dre fouclolng
+Algorithmic approaches discovering truths
 
 ## Research Focus
 

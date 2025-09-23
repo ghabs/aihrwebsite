@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Delmar"
+description: "Quithen moren flaxed systems"
+order: 10
 ---
 
-# Callion
+# Delmar
 
-Shoels slirtf mitees dre fouclolng
+Quithen moren flaxed systems
 
 ## Research Focus
 

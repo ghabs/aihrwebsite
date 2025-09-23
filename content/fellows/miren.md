@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Miren"
+description: "Cognitive systems enhancing reasoning"
+order: 19
 ---
 
-# Callion
+# Miren
 
-Shoels slirtf mitees dre fouclolng
+Cognitive systems enhancing reasoning
 
 ## Research Focus
 

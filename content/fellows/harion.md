@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Harion"
+description: "Digital realms exploring frontiers"
+order: 14
 ---
 
-# Callion
+# Harion
 
-Shoels slirtf mitees dre fouclolng
+Digital realms exploring frontiers
 
 ## Research Focus
 

@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Idris"
+description: "Neural networks processing insights"
+order: 15
 ---
 
-# Callion
+# Idris
 
-Shoels slirtf mitees dre fouclolng
+Neural networks processing insights
 
 ## Research Focus
 

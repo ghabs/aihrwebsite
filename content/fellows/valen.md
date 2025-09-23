@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Valen"
+description: "Logical frameworks supporting decisions"
+order: 28
 ---
 
-# Callion
+# Valen
 
-Shoels slirtf mitees dre fouclolng
+Logical frameworks supporting decisions
 
 ## Research Focus
 

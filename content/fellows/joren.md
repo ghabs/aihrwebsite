@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Joren"
+description: "Quantum theories examining possibilities"
+order: 16
 ---
 
-# Callion
+# Joren
 
-Shoels slirtf mitees dre fouclolng
+Quantum theories examining possibilities
 
 ## Research Focus
 

@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Ulric"
+description: "Semantic networks understanding context"
+order: 27
 ---
 
-# Callion
+# Ulric
 
-Shoels slirtf mitees dre fouclolng
+Semantic networks understanding context
 
 ## Research Focus
 

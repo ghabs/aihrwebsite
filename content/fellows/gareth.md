@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Gareth"
+description: "Cosmic patterns weaving solutions"
+order: 13
 ---
 
-# Callion
+# Gareth
 
-Shoels slirtf mitees dre fouclolng
+Cosmic patterns weaving solutions
 
 ## Research Focus
 

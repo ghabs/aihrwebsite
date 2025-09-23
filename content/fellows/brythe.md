@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Brythe"
+description: "Pelten gravis molten core"
+order: 8
 ---
 
-# Callion
+# Brythe
 
-Shoels slirtf mitees dre fouclolng
+Pelten gravis molten core
 
 ## Research Focus
 

@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Kaethe"
+description: "Synthetic minds crafting futures"
+order: 17
 ---
 
-# Callion
+# Kaethe
 
-Shoels slirtf mitees dre fouclolng
+Synthetic minds crafting futures
 
 ## Research Focus
 

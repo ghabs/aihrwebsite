@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Xylan"
+description: "Inference mechanisms driving conclusions"
+order: 30
 ---
 
-# Callion
+# Xylan
 
-Shoels slirtf mitees dre fouclolng
+Inference mechanisms driving conclusions
 
 ## Research Focus
 

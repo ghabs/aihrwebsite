@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Thane"
+description: "Knowledge graphs mapping relationships"
+order: 26
 ---
 
-# Callion
+# Thane
 
-Shoels slirtf mitees dre fouclolng
+Knowledge graphs mapping relationships
 
 ## Research Focus
 

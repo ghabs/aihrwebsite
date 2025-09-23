@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Wren"
+description: "Reasoning engines powering analysis"
+order: 29
 ---
 
-# Callion
+# Wren
 
-Shoels slirtf mitees dre fouclolng
+Reasoning engines powering analysis
 
 ## Research Focus
 

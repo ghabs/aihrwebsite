@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Quill"
+description: "Machine learning optimizing outcomes"
+order: 23
 ---
 
-# Callion
+# Quill
 
-Shoels slirtf mitees dre fouclolng
+Machine learning optimizing outcomes
 
 ## Research Focus
 

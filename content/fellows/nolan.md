@@ -1,12 +1,12 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
-order: 6
+name: "Nolan"
+description: "Computational models advancing knowledge"
+order: 20
 ---
 
-# Callion
+# Nolan
 
-Shoels slirtf mitees dre fouclolng
+Computational models advancing knowledge
 
 ## Research Focus
 
