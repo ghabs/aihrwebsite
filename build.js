@@ -192,7 +192,7 @@ function generateFellows() {
     }).join('');
 }
 
-// Generate HTML
+// Generate HTML (Single Page Version)
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -206,12 +206,12 @@ const html = `<!DOCTYPE html>
         <!-- Navigation -->
         <nav class="main-nav">
             <ul>
-                <li><a href="index.html" class="active">Fellowship</a></li>
-                <li><a href="theory.html">Theory</a></li>
+                <li><a href="#hero" class="active">AI for Human Reasoning</a></li>
+                <li><a href="#fellowship">Fellowship</a></li>
             </ul>
         </nav>
         <!-- Hero Section -->
-        <section class="hero">
+        <section class="hero" id="hero">
             <!-- Decorative network nodes -->
             <div class="hero-decorations top-left">
                 <div class="network-icon">
@@ -243,22 +243,12 @@ const html = `<!DOCTYPE html>
 
         <!-- Vision Section -->
         <section class="section">
-            <div class="two-column">
-                <div>
-                    <h2>${vision.frontmatter.title}</h2>
-                    <div class="content">${vision.content}</div>
-                    <div style="margin-top: 2rem;">
-                        <a href="theory.html" class="btn-outline">MORE ON THE THEORY</a>
-                    </div>
-                </div>
-                <div>
-                    <div style="text-align: center; margin-top: 2rem;">
-                        <img src="assets/images/vision-diagram.png" alt="Vision diagram showing complex coordination networks" style="max-width: 100%; height: auto; margin-top: 50px;">
-                    </div>
-                </div>
+            <h2 class="section-title">${vision.frontmatter.title}</h2>
+            <div class="main-content">
+                <div class="content">${vision.content}</div>
             </div>
         </section>
-
+        
         <!-- Fellowship Section -->
         <section class="section" id="fellowship">
             <h2 class="section-title">${fellowship.frontmatter.title}</h2>
