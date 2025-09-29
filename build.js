@@ -3,7 +3,9 @@ const path = require('path');
 const MarkdownIt = require('markdown-it');
 const yaml = require('js-yaml');
 
-const md = new MarkdownIt();
+const md = new MarkdownIt({
+    html: true // Allow HTML tags in markdown
+});
 
 // Read content files
 function readContentFile(filename) {
@@ -59,8 +61,14 @@ function readResearch() {
 // Read theory sections
 function readTheorySections() {
     const theoryDir = path.join(__dirname, 'content', 'theory');
+
+    // Check if theory directory exists
+    if (!fs.existsSync(theoryDir)) {
+        return [];
+    }
+
     const theoryFiles = fs.readdirSync(theoryDir).filter(file => file.endsWith('.md'));
-    
+
     return theoryFiles.map(file => {
         const theoryContent = readContentFile(`theory/${file}`);
         return {
@@ -880,7 +888,7 @@ const theoryHtml = `<!DOCTYPE html>
         </section>
 
         <!-- Theory Sections -->
-        ${theorySections.map(section => `
+        ${theorySections.length > 0 ? theorySections.map(section => `
             <section class="theory-section" id="${section.id}">
                 <div class="theory-section-content">
                     <div class="theory-text">
@@ -896,7 +904,7 @@ const theoryHtml = `<!DOCTYPE html>
                     </div>
                 </div>
             </section>
-        `).join('')}
+        `).join('') : ''}
     </div>
 </body>
 </html>`;
