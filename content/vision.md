@@ -1,7 +1,10 @@
 ---
 title: "Why this area?"
 ---
-<img src="assets/images/vision-diagram.png" alt="Vision diagram showing complex coordination networks" class="theory-image-right" style="float: right; margin: 0 0 20px 20px; max-width: 300px; height: auto;">
+
+# AI For Human Reasoning
+
+<img src="assets/images/vision-diagram.png" alt="Vision diagram showing complex coordination networks" class="theory-image-right" style="float: right; margin: 0 0 20px 20px; max-width: 400px; height: auto;">
 
 As artificial intelligence capabilities expand, they will inevitably make our world more complex. The critical challenge is to ensure that our ability to understand and navigate this complexity grows in tandem. We believe a specific class of technologies, AI for Human Reasoning, is essential to this task. This approach prioritizes developing AI that augments human understanding and decision-making, ensuring that our collective wisdom can outpace the challenges we create.
 
@@ -31,7 +34,7 @@ While acknowledging the need to approach this area with discernment, we believe 
 
 Together, we expect that these quantitative differences will create a qualitative shift in what's possible in AI for Human Reasoning.
 
-## A Critical Safeguard
+## Why?
 
 As AI capabilities grow, we are far from guaranteed to navigate this transition wisely. The most catastrophic failures in history, and the existential risks we face in the future, often stem not from pure malice but from people and institutions making critical mistakes, even by their own lights.
 

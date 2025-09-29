@@ -211,44 +211,14 @@ const html = `<!DOCTYPE html>
             </ul>
         </nav>
         <!-- Hero Section -->
-        <section class="hero" id="hero">
-            <!-- Decorative network nodes -->
-            <div class="hero-decorations top-left">
-                <div class="network-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        ${networkNodeSvg}
-                    </svg>
-                </div>
-            </div>
-            <div class="hero-decorations top-right">
-                <div class="network-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        ${networkNodeSvg}
-                    </svg>
-                </div>
-            </div>
-            <div class="hero-decorations bottom-right">
-                <div class="network-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        ${networkNodeSvg}
-                    </svg>
-                </div>
-            </div>
-
-            <h1 class="hero-title">${(hero.frontmatter.title || '').replace(/\s&\s/g, '<br>&<br>')}</h1>
-            <p class="hero-subtitle">
-                ${hero.frontmatter.subtitle}
-            </p>
-        </section>
 
         <!-- Vision Section -->
         <section class="section">
-            <h2 class="section-title">${vision.frontmatter.title}</h2>
             <div class="main-content">
                 <div class="content">${vision.content}</div>
             </div>
         </section>
-        
+
         <!-- Fellowship Section -->
         <section class="section" id="fellowship">
             <h2 class="section-title">${fellowship.frontmatter.title}</h2>
