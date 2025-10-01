@@ -200,6 +200,54 @@ const html = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${hero.frontmatter.title}</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            cursor: pointer;
+        }
+
+        .lightbox-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .lightbox-close:hover {
+            opacity: 0.7;
+        }
+
+        .clickable-image {
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .clickable-image:hover {
+            opacity: 0.9;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -268,6 +316,12 @@ const html = `<!DOCTYPE html>
                 </div>
             </div>
         </div>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img class="lightbox-content" id="lightbox-image" src="" alt="">
+        </div>
     </div>
 
     <script>
@@ -321,7 +375,39 @@ const html = `<!DOCTYPE html>
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeFellowModal();
+                closeLightbox();
             }
+        });
+
+        // Lightbox functionality
+        function openLightbox(imageSrc, imageAlt) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+
+            lightboxImage.src = imageSrc;
+            lightboxImage.alt = imageAlt || '';
+            lightbox.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Make all images clickable after page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(function(img) {
+                // Skip fellow portraits and other non-content images
+                if (!img.closest('.fellow-portrait') && !img.closest('.modal') && !img.closest('.lightbox')) {
+                    img.classList.add('clickable-image');
+                    img.addEventListener('click', function() {
+                        openLightbox(img.src, img.alt);
+                    });
+                }
+            });
         });
     </script>
 </body>
