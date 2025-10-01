@@ -1,12 +1,12 @@
 ---
-name: "Orian"
-description: "Intelligent agents facilitating coordination"
+name: "Nathan Young"
+description: "Research focus and expertise in AI for human reasoning"
 order: 21
 ---
 
-# Orian
+# Nathan Young
 
-Intelligent agents facilitating coordination
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

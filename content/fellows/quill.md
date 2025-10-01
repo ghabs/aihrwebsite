@@ -1,12 +1,12 @@
 ---
-name: "Quill"
-description: "Machine learning optimizing outcomes"
+name: "Nuno Sempere"
+description: "Research focus and expertise in AI for human reasoning"
 order: 23
 ---
 
-# Quill
+# Nuno Sempere
 
-Machine learning optimizing outcomes
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

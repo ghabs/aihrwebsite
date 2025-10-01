@@ -1,10 +1,10 @@
 ---
-name: "Harion"
-description: "Digital realms exploring frontiers"
+name: "Gordon Brander"
+description: "Research focus and expertise in AI for human reasoning"
 order: 14
 ---
 
-# Harion
+# Gordon Brander
 
 Digital realms exploring frontiers
 

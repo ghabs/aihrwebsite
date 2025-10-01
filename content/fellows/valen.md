@@ -1,12 +1,12 @@
 ---
-name: "Valen"
-description: "Logical frameworks supporting decisions"
+name: "Sofia Vanhanen"
+description: "Research focus and expertise in AI for human reasoning"
 order: 28
 ---
 
-# Valen
+# Sofia Vanhanen
 
-Logical frameworks supporting decisions
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

@@ -1,12 +1,12 @@
 ---
-name: "Wren"
-description: "Reasoning engines powering analysis"
+name: "Steve Isley"
+description: "Research focus and expertise in AI for human reasoning"
 order: 29
 ---
 
-# Wren
+# Steve Isley
 
-Reasoning engines powering analysis
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

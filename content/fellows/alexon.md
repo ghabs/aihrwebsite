@@ -1,10 +1,10 @@
 ---
-name: "Alexon"
-description: "Morgen thale vicken sorth"
+name: "Agita Pasaribu"
+description: "Research focus and expertise in AI for human reasoning"
 order: 7
 ---
 
-# Alexon
+# Agita Pasaribu
 
 Morgen thale vicken sorth
 

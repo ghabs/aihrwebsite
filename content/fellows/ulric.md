@@ -1,12 +1,12 @@
 ---
-name: "Ulric"
-description: "Semantic networks understanding context"
+name: "Siddarth Srinivasan"
+description: "Research focus and expertise in AI for human reasoning"
 order: 27
 ---
 
-# Ulric
+# Siddarth Srinivasan
 
-Semantic networks understanding context
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

@@ -1,12 +1,12 @@
 ---
-name: "Reolon"
-description: "Fliolem seealahe spoh"
+name: "Paul de Font-Reaulx"
+description: "Research focus and expertise in AI for human reasoning"
 order: 5
 ---
 
-# Reolon
+# Paul de Font-Reaulx
 
-Fliolem seealahe spoh
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

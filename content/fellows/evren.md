@@ -1,10 +1,10 @@
 ---
-name: "Evren"
-description: "Brantel codes merging protocols"
+name: "Anand Shah"
+description: "Research focus and expertise in AI for human reasoning"
 order: 11
 ---
 
-# Evren
+# Anand Shah
 
 Brantel codes merging protocols
 

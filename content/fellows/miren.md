@@ -1,12 +1,12 @@
 ---
-name: "Miren"
-description: "Cognitive systems enhancing reasoning"
+name: "Matthew Brooks"
+description: "Research focus and expertise in AI for human reasoning"
 order: 19
 ---
 
-# Miren
+# Matthew Brooks
 
-Cognitive systems enhancing reasoning
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

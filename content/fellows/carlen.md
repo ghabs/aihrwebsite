@@ -1,10 +1,10 @@
 ---
-name: "Carlen"
-description: "Nexal forms brewing concepts"
+name: "Alexander van Grootel"
+description: "Research focus and expertise in AI for human reasoning"
 order: 9
 ---
 
-# Carlen
+# Alexander van Grootel
 
 Nexal forms brewing concepts
 

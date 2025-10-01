@@ -1,12 +1,12 @@
 ---
-name: "Raven"
-description: "Data structures organizing information"
+name: "Parker Whitfill"
+description: "Research focus and expertise in AI for human reasoning"
 order: 24
 ---
 
-# Raven
+# Parker Whitfill
 
-Data structures organizing information
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

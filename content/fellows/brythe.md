@@ -1,10 +1,10 @@
 ---
-name: "Brythe"
-description: "Pelten gravis molten core"
+name: "Alejandro Botas"
+description: "Research focus and expertise in AI for human reasoning"
 order: 8
 ---
 
-# Brythe
+# Alejandro Botas
 
 Pelten gravis molten core
 

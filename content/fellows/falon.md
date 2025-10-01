@@ -1,10 +1,10 @@
 ---
-name: "Falon"
-description: "Zenith frameworks building bridges"
+name: "Ben Sklaroff"
+description: "Research focus and expertise in AI for human reasoning"
 order: 12
 ---
 
-# Falon
+# Ben Sklaroff
 
 Zenith frameworks building bridges
 

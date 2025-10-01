@@ -1,10 +1,10 @@
 ---
-name: "Delmar"
-description: "Quithen moren flaxed systems"
+name: "Alyssia Jovellanos"
+description: "Research focus and expertise in AI for human reasoning"
 order: 10
 ---
 
-# Delmar
+# Alyssia Jovellanos
 
 Quithen moren flaxed systems
 

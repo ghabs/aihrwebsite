@@ -1,10 +1,10 @@
 ---
-name: "Gengnt"
-description: "Prelivs suekchanflarting ehtolatny"
+name: "Emma Kumleben"
+description: "Research focus and expertise in AI for human reasoning"
 order: 2
 ---
 
-# Gengnt
+# Emma Kumleben
 
 Prelivs suekchanflarting ehtolatny
 

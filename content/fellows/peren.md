@@ -1,12 +1,12 @@
 ---
-name: "Peren"
-description: "Automated processes streamlining workflows"
+name: "Niki Dupuis"
+description: "Research focus and expertise in AI for human reasoning"
 order: 22
 ---
 
-# Peren
+# Niki Dupuis
 
-Automated processes streamlining workflows
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

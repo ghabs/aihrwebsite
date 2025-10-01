@@ -1,10 +1,10 @@
 ---
-name: "Kaethe"
-description: "Synthetic minds crafting futures"
+name: "Joshua Levy"
+description: "Research focus and expertise in AI for human reasoning"
 order: 17
 ---
 
-# Kaethe
+# Joshua Levy
 
 Synthetic minds crafting futures
 

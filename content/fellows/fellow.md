@@ -1,10 +1,10 @@
 ---
-name: "Fellow"
-description: "Then unalext filter are hargle"
+name: "Blake Borgeson"
+description: "Research focus and expertise in AI for human reasoning"
 order: 1
 ---
 
-# Fellow
+# Blake Borgeson
 
 Then unalext filter are hargle
 

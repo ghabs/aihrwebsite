@@ -1,10 +1,10 @@
 ---
-name: "Callion"
-description: "Shoels slirtf mitees dre fouclolng"
+name: "Alex Bleakley"
+description: "Research focus and expertise in AI for human reasoning"
 order: 6
 ---
 
-# Callion
+# Alex Bleakley
 
 Shoels slirtf mitees dre fouclolng
 

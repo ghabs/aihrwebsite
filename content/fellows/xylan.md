@@ -1,12 +1,12 @@
 ---
-name: "Xylan"
-description: "Inference mechanisms driving conclusions"
+name: "Tamera Lanham"
+description: "Research focus and expertise in AI for human reasoning"
 order: 30
 ---
 
-# Xylan
+# Tamera Lanham
 
-Inference mechanisms driving conclusions
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

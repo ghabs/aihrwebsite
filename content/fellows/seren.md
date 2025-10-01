@@ -1,12 +1,12 @@
 ---
-name: "Seren"
-description: "Information systems connecting communities"
+name: "Robert Gordon"
+description: "Research focus and expertise in AI for human reasoning"
 order: 25
 ---
 
-# Seren
+# Robert Gordon
 
-Information systems connecting communities
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

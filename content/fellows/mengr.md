@@ -1,10 +1,10 @@
 ---
-name: "Mengr"
-description: "Frcen countatuonln"
+name: "Martin Ciesielski-Listwan"
+description: "Research focus and expertise in AI for human reasoning"
 order: 3
 ---
 
-# Mengr
+# Martin Ciesielski-Listwan
 
 Frcen countatuonln
 

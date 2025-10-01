@@ -1,12 +1,12 @@
 ---
-name: "Thane"
-description: "Knowledge graphs mapping relationships"
+name: "Seth Killian"
+description: "Research focus and expertise in AI for human reasoning"
 order: 26
 ---
 
-# Thane
+# Seth Killian
 
-Knowledge graphs mapping relationships
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

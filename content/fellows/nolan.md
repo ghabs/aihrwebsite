@@ -1,12 +1,12 @@
 ---
-name: "Nolan"
-description: "Computational models advancing knowledge"
+name: "Maximilian Kroner Dale"
+description: "Research focus and expertise in AI for human reasoning"
 order: 20
 ---
 
-# Nolan
+# Maximilian Kroner Dale
 
-Computational models advancing knowledge
+Research focus and expertise in AI for human reasoning
 
 ## Research Focus
 

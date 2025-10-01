@@ -1,10 +1,10 @@
 ---
-name: "Joren"
-description: "Quantum theories examining possibilities"
+name: "Jamie Joyce"
+description: "Research focus and expertise in AI for human reasoning"
 order: 16
 ---
 
-# Joren
+# Jamie Joyce
 
 Quantum theories examining possibilities
 

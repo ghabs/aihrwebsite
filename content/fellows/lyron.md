@@ -1,10 +1,10 @@
 ---
-name: "Lyron"
-description: "Algorithmic approaches discovering truths"
+name: "Luke Hewitt"
+description: "Research focus and expertise in AI for human reasoning"
 order: 18
 ---
 
-# Lyron
+# Luke Hewitt
 
 Algorithmic approaches discovering truths
 

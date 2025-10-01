@@ -1,10 +1,10 @@
 ---
-name: "Kanar"
-description: "Oxgenred oamm elles"
+name: "Kai J. Sandbrink"
+description: "Research focus and expertise in AI for human reasoning"
 order: 4
 ---
 
-# Kanar
+# Kai J. Sandbrink
 
 Oxgenred oamm elles
 

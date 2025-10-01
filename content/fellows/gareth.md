@@ -1,10 +1,10 @@
 ---
-name: "Gareth"
-description: "Cosmic patterns weaving solutions"
+name: "Colin Megill"
+description: "Research focus and expertise in AI for human reasoning"
 order: 13
 ---
 
-# Gareth
+# Colin Megill
 
 Cosmic patterns weaving solutions
 

@@ -1,10 +1,10 @@
 ---
-name: "Idris"
-description: "Neural networks processing insights"
+name: "Herbie Bradley"
+description: "Research focus and expertise in AI for human reasoning"
 order: 15
 ---
 
-# Idris
+# Herbie Bradley
 
 Neural networks processing insights
 
