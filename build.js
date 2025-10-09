@@ -409,6 +409,20 @@ const html = `<!DOCTYPE html>
                 }
             });
         });
+
+        // Read More / Collapsible Content functionality
+        function toggleReadMore() {
+            const collapsibleContent = document.getElementById('collapsibleContent');
+            const readMoreBtn = document.getElementById('readMoreBtn');
+
+            if (collapsibleContent.classList.contains('expanded')) {
+                collapsibleContent.classList.remove('expanded');
+                readMoreBtn.textContent = 'Read More';
+            } else {
+                collapsibleContent.classList.add('expanded');
+                readMoreBtn.textContent = 'Read Less';
+            }
+        }
     </script>
 </body>
 </html>`;

@@ -16,6 +16,10 @@ Uplifting society to the point where we reliably avoid these errors feels like a
 
 This approach prioritizes developing AI that augments human understanding and decision-making rather than replacing it, ensuring that our collective wisdom can outpace the challenges we create.
 
+<div class="read-more-container">
+  <button class="read-more-btn" onclick="toggleReadMore()" id="readMoreBtn">Read More</button>
+  <div class="collapsible-content" id="collapsibleContent">
+
 Contemporary AI makes this vision newly practical:
 
 <img src="assets/images/loom_weaver.png" alt="Loom Weaver - AI system for synthesizing knowledge and facilitating understanding" class="theory-image-left" style="float: left; margin: 0 20px 20px 0; max-width: 300px; height: auto;">
@@ -40,3 +44,6 @@ Examples of tools include:
 As AI capabilities grow, we are far from guaranteed to navigate the transition wisely. The most catastrophic failures in history, and the existential risks we face in the future, often stem not from pure malice but from people and institutions making critical mistakes, even by their own lights.
 
 Improving human reasoning is therefore not just an optimistic goal; it is a critical safeguard. By providing tools that help us avoid unforced errors, clarify our true priorities, and understand the consequences of our actions, we can better navigate the challenges AI presents.
+
+  </div>
+</div>
