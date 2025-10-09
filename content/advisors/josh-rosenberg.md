@@ -1,10 +1,10 @@
 ---
-name: "Tamera Lanham"
-description: "Research focus and expertise in AI for human reasoning"
-order: 30
+name: "Josh Rosenberg"
+website: "https://example.com/josh-rosenberg"
+order: 6
 ---
 
-# Tamera Lanham
+# Josh Rosenberg
 
 Research focus and expertise in AI for human reasoning
 
@@ -16,7 +16,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
 - Project 1: Description of ongoing work
 - Project 2: Additional research initiative
-- Project 3: Collaboration with other fellows
+- Project 3: Collaboration with other advisors
 
 ## Background
 

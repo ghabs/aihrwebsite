@@ -27,12 +27,34 @@ function readContentFile(filename) {
 function readFellows() {
     const fellowsDir = path.join(__dirname, 'content', 'fellows');
     const fellowFiles = fs.readdirSync(fellowsDir).filter(file => file.endsWith('.md'));
-    
+
     return fellowFiles.map(file => {
         const fellowContent = readContentFile(`fellows/${file}`);
         return {
             ...fellowContent.frontmatter,
-            filename: file
+            filename: file,
+            type: 'fellow'
+        };
+    }).sort((a, b) => (a.order || 0) - (b.order || 0));
+}
+
+// Read advisors
+function readAdvisors() {
+    const advisorsDir = path.join(__dirname, 'content', 'advisors');
+
+    // Check if advisors directory exists
+    if (!fs.existsSync(advisorsDir)) {
+        return [];
+    }
+
+    const advisorFiles = fs.readdirSync(advisorsDir).filter(file => file.endsWith('.md'));
+
+    return advisorFiles.map(file => {
+        const advisorContent = readContentFile(`advisors/${file}`);
+        return {
+            ...advisorContent.frontmatter,
+            filename: file,
+            type: 'advisor'
         };
     }).sort((a, b) => (a.order || 0) - (b.order || 0));
 }
@@ -102,6 +124,7 @@ const fellowship = readContentFile('fellowship.md');
 const fellowshipDescription = readContentFile('fellowship-description.md');
 const theory = readContentFile('theory.md');
 const fellows = readFellows();
+const advisors = readAdvisors();
 const projects = readProjects();
 const research = readResearch();
 const theorySections = readTheorySections();
@@ -164,32 +187,129 @@ function generateProjectsListing() {
     `).join('');
 }
 
-// Generate fellows HTML
+// Generate projects HTML
+function generateProjects() {
+    return projects.map((project, index) => `
+        <div class="project-card" onclick="openProjectModal(${index})" data-project-index="${index}">
+            <div class="project-icon">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="30" cy="18" r="4" fill="currentColor"/>
+                    <circle cx="15" cy="42" r="4" fill="currentColor"/>
+                    <circle cx="45" cy="42" r="4" fill="currentColor"/>
+                    <circle cx="30" cy="30" r="6" fill="none"/>
+                    <line x1="30" y1="22" x2="30" y2="24"/>
+                    <line x1="25" y1="33" x2="19" y2="39"/>
+                    <line x1="35" y1="33" x2="41" y2="39"/>
+                </svg>
+            </div>
+            <h3 class="project-name">${project.title}</h3>
+            <p class="project-description">${project.description}</p>
+        </div>
+    `).join('');
+}
+
+// Helper function to check if fellow profile image exists
+function getFellowImagePath(fellowName) {
+    const imageName = fellowName.toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
+        .replace(/\s+/g, '-') // Replace spaces with hyphens
+        .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+        .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+
+    const possibleExtensions = ['jpg', 'jpeg', 'png', 'webp'];
+    const fellowsImagesPath = path.join(__dirname, 'assets', 'images', 'fellows');
+
+    for (const ext of possibleExtensions) {
+        const imagePath = path.join(fellowsImagesPath, `${imageName}.${ext}`);
+        if (fs.existsSync(imagePath)) {
+            return `assets/images/fellows/${imageName}.${ext}`;
+        }
+    }
+    return null;
+}
+
+// Helper function to check if advisor profile image exists
+function getAdvisorImagePath(advisorName) {
+    const imageName = advisorName.toLowerCase()
+        .replace(/ü/g, 'u') // Replace umlaut u
+        .replace(/ö/g, 'o') // Replace umlaut o
+        .replace(/ä/g, 'a') // Replace umlaut a
+        .replace(/ß/g, 'ss') // Replace sharp s
+        .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
+        .replace(/\s+/g, '-') // Replace spaces with hyphens
+        .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+        .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+
+    const possibleExtensions = ['jpg', 'jpeg', 'png', 'webp'];
+    const advisorsImagesPath = path.join(__dirname, 'assets', 'images', 'advisors');
+
+    for (const ext of possibleExtensions) {
+        const imagePath = path.join(advisorsImagesPath, `${imageName}.${ext}`);
+        if (fs.existsSync(imagePath)) {
+            return `assets/images/advisors/${imageName}.${ext}`;
+        }
+    }
+    return null;
+}
+
+// Generate fellows and advisors HTML
 function generateFellows() {
-    return fellows.map((fellow, index) => {
+    // Generate fellows
+    const fellowsHtml = fellows.map((fellow, index) => {
         // Read the full fellow content for the modal
         const fellowContent = readContentFile(`fellows/${fellow.filename}`);
-        const fellowData = {
-            name: fellow.name,
-            description: fellow.description,
-            content: fellowContent.content
-        };
-        
+
+        // Check for profile image
+        const imagePath = getFellowImagePath(fellow.name);
+
+        const portraitHtml = imagePath ?
+            `<img src="${imagePath}" alt="${fellow.name}" class="fellow-image">` :
+            `<div class="portrait-placeholder">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="30" cy="20" r="8"/>
+                    <path d="M12 50c0-10 8-18 18-18s18 8 18 18"/>
+                </svg>
+            </div>`;
+
         return `
-        <div class="fellow-card" onclick="openFellowModal(${index})" data-fellow-index="${index}">
+        <div class="fellow-card people-item fellow-type" onclick="openFellowModal(${index})" data-fellow-index="${index}" data-type="fellow">
             <div class="fellow-portrait">
-                <div class="portrait-placeholder">
-                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="30" cy="20" r="8"/>
-                        <path d="M12 50c0-10 8-18 18-18s18 8 18 18"/>
-                    </svg>
-                </div>
+                ${portraitHtml}
             </div>
             <h3 class="fellow-name">${fellow.name}</h3>
             <p class="fellow-description">${fellow.description}</p>
         </div>
     `;
     }).join('');
+
+    // Generate advisors
+    const advisorsHtml = advisors.map((advisor) => {
+        const roleLabel = advisor.role ? advisor.role.toUpperCase() : 'ADVISOR';
+
+        // Check for advisor profile image
+        const imagePath = getAdvisorImagePath(advisor.name);
+        const portraitContent = imagePath ?
+            `<img src="${imagePath}" alt="${advisor.name}" class="fellow-image">` :
+            `<div class="portrait-placeholder advisor-placeholder">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="30" cy="20" r="8"/>
+                    <path d="M12 50c0-10 8-18 18-18s18 8 18 18"/>
+                </svg>
+            </div>`;
+
+        return `
+        <div class="advisor-card people-item advisor-type" onclick="window.open('${advisor.website}', '_blank')" data-type="advisor">
+            <div class="fellow-portrait">
+                ${portraitContent}
+            </div>
+            <h3 class="fellow-name">${advisor.name}</h3>
+            ${advisor.description ? `<p class="fellow-description">${advisor.description}</p>` : ''}
+            <p class="advisor-label">${roleLabel}</p>
+        </div>
+    `;
+    }).join('');
+
+    return fellowsHtml + advisorsHtml;
 }
 
 // Generate HTML (Single Page Version)
@@ -274,12 +394,31 @@ const html = `<!DOCTYPE html>
                 <div class="content">${fellowship.content}</div>
             </div>
 
-            <!-- Fellows Header -->
-            <h3 class="fellows-header">FELLOWS</h3>
+            <!-- Mode Toggle Controls -->
+            <div class="section-controls">
+                <!-- Mode Toggle Switch -->
+                <div class="mode-toggle">
+                    <div class="toggle-switch">
+                        <input type="radio" id="people-mode" name="mode" value="people" checked>
+                        <label for="people-mode">People</label>
+                        <input type="radio" id="projects-mode" name="mode" value="projects">
+                        <label for="projects-mode">Projects</label>
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
 
-            <!-- Fellows Grid -->
-            <div class="fellows-grid">
+            <!-- Dynamic Header -->
+            <h3 class="dynamic-header" id="dynamicHeader">PEOPLE</h3>
+
+            <!-- People Grid (Fellows and Advisors) -->
+            <div class="people-grid" id="peopleGrid">
                 ${generateFellows()}
+            </div>
+
+            <!-- Projects Grid (hidden by default) -->
+            <div class="projects-grid" id="projectsGrid" style="display: none;">
+                ${generateProjects()}
             </div>
         </section>
 
@@ -307,12 +446,34 @@ const html = `<!DOCTYPE html>
                     <span class="modal-close" onclick="closeFellowModal()">&times;</span>
                 </div>
                 <div class="modal-body">
+                    <div class="modal-fellow-image-container">
+                        <img id="modalFellowImage" src="" alt="" class="modal-fellow-image">
+                    </div>
                     <p id="modalFellowDescription"></p>
                     <div id="modalFellowContent"></div>
                 </div>
                 <div class="modal-footer">
                     <button onclick="previousFellow()" id="prevBtn">← Previous Fellow</button>
                     <button onclick="nextFellow()" id="nextBtn">Next Fellow →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Modal -->
+        <div id="projectModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalProjectName"></h2>
+                    <span class="modal-close" onclick="closeProjectModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p id="modalProjectDescription"></p>
+                    <div id="modalProjectContent"></div>
+                    <div id="modalProjectCapabilities"></div>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="previousProject()" id="prevProjectBtn">← Previous Project</button>
+                    <button onclick="nextProject()" id="nextProjectBtn">Next Project →</button>
                 </div>
             </div>
         </div>
@@ -331,7 +492,8 @@ const html = `<!DOCTYPE html>
             return {
                 name: fellow.name,
                 description: fellow.description,
-                content: fellowContent.content
+                content: fellowContent.content,
+                imagePath: getFellowImagePath(fellow.name)
             };
         }))};
 
@@ -340,10 +502,22 @@ const html = `<!DOCTYPE html>
         function openFellowModal(index) {
             currentFellowIndex = index;
             const fellow = fellowsData[index];
-            
+
             document.getElementById('modalFellowName').textContent = fellow.name;
             document.getElementById('modalFellowDescription').textContent = fellow.description;
             document.getElementById('modalFellowContent').innerHTML = fellow.content;
+
+            // Handle fellow image
+            const modalImage = document.getElementById('modalFellowImage');
+            const imageContainer = document.querySelector('.modal-fellow-image-container');
+            if (fellow.imagePath) {
+                modalImage.src = fellow.imagePath;
+                modalImage.alt = fellow.name;
+                imageContainer.style.display = 'block';
+            } else {
+                imageContainer.style.display = 'none';
+            }
+
             document.getElementById('fellowModal').style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
@@ -365,9 +539,12 @@ const html = `<!DOCTYPE html>
 
         // Close modal when clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('fellowModal');
-            if (event.target === modal) {
+            const fellowModal = document.getElementById('fellowModal');
+            const projectModal = document.getElementById('projectModal');
+            if (event.target === fellowModal) {
                 closeFellowModal();
+            } else if (event.target === projectModal) {
+                closeProjectModal();
             }
         }
 
@@ -375,6 +552,7 @@ const html = `<!DOCTYPE html>
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeFellowModal();
+                closeProjectModal();
                 closeLightbox();
             }
         });
@@ -423,6 +601,102 @@ const html = `<!DOCTYPE html>
                 readMoreBtn.textContent = 'Read Less';
             }
         }
+
+        // Project data for modal (placeholder - will be populated when projects are added)
+        const projectsData = ${JSON.stringify(projects.map(project => {
+            const projectContent = readContentFile(`projects/${project.filename}`);
+            return {
+                title: project.title,
+                description: project.description,
+                content: projectContent.content,
+                relatedFellows: project.related_fellows || []
+            };
+        }))};
+
+        let currentProjectIndex = 0;
+
+        // Project modal functions
+        function openProjectModal(index) {
+            currentProjectIndex = index;
+            const project = projectsData[index];
+
+            document.getElementById('modalProjectName').textContent = project.title;
+            document.getElementById('modalProjectDescription').textContent = project.description;
+            document.getElementById('modalProjectContent').innerHTML = project.content;
+
+            // Generate capabilities HTML
+            const capabilitiesHtml = project.foundational_capabilities ?
+                project.foundational_capabilities.map(cap =>
+                    '<div class="capability-item"><h4>' + cap.title + '</h4><p>' + cap.description + '</p></div>'
+                ).join('') : '';
+
+            if (capabilitiesHtml) {
+                document.getElementById('modalProjectCapabilities').innerHTML =
+                    '<h3>Foundational Capabilities</h3>' + capabilitiesHtml;
+            } else {
+                document.getElementById('modalProjectCapabilities').innerHTML = '';
+            }
+
+            document.getElementById('projectModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function nextProject() {
+            const nextIndex = (currentProjectIndex + 1) % projectsData.length;
+            openProjectModal(nextIndex);
+        }
+
+        function previousProject() {
+            const prevIndex = currentProjectIndex === 0 ? projectsData.length - 1 : currentProjectIndex - 1;
+            openProjectModal(prevIndex);
+        }
+
+        // Mode switching functionality
+        function initializeModeSwitch() {
+            const peopleMode = document.getElementById('people-mode');
+            const projectsMode = document.getElementById('projects-mode');
+            const peopleGrid = document.getElementById('peopleGrid');
+            const projectsGrid = document.getElementById('projectsGrid');
+            const dynamicHeader = document.getElementById('dynamicHeader');
+
+            function switchMode(mode) {
+                if (mode === 'people') {
+                    peopleGrid.style.display = 'grid';
+                    projectsGrid.style.display = 'none';
+                    dynamicHeader.textContent = 'PEOPLE';
+                } else if (mode === 'projects') {
+                    peopleGrid.style.display = 'none';
+                    projectsGrid.style.display = 'grid';
+                    dynamicHeader.textContent = 'PROJECTS';
+                }
+            }
+
+            // Add event listeners for mode toggle
+            peopleMode.addEventListener('change', function() {
+                if (this.checked) {
+                    switchMode('people');
+                }
+            });
+
+            projectsMode.addEventListener('change', function() {
+                if (this.checked) {
+                    switchMode('projects');
+                }
+            });
+
+            // Initialize with people mode
+            switchMode('people');
+        }
+
+        // Initialize the dual-mode interface when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeModeSwitch();
+        });
     </script>
 </body>
 </html>`;
@@ -1001,13 +1275,26 @@ if (!fs.existsSync(imagesDir)) {
 // Copy all images from assets/images to dist/assets/images
 const assetsImagesPath = path.join(__dirname, 'assets', 'images');
 if (fs.existsSync(assetsImagesPath)) {
-    const imageFiles = fs.readdirSync(assetsImagesPath);
-    imageFiles.forEach(file => {
-        fs.copyFileSync(
-            path.join(assetsImagesPath, file),
-            path.join(imagesDir, file)
-        );
-    });
+    // Function to recursively copy directories
+    function copyDir(src, dest) {
+        if (!fs.existsSync(dest)) {
+            fs.mkdirSync(dest, { recursive: true });
+        }
+
+        const items = fs.readdirSync(src);
+        items.forEach(item => {
+            const srcPath = path.join(src, item);
+            const destPath = path.join(dest, item);
+
+            if (fs.statSync(srcPath).isDirectory()) {
+                copyDir(srcPath, destPath);
+            } else {
+                fs.copyFileSync(srcPath, destPath);
+            }
+        });
+    }
+
+    copyDir(assetsImagesPath, imagesDir);
 }
 
 // Write the generated HTML files to output directory
