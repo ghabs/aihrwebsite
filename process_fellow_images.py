@@ -94,7 +94,7 @@ def name_to_filename(name):
 def apply_crosshatch_style(client, image_path, output_path):
     """Apply crosshatch pen style to image using Google AI"""
     try:
-        prompt = "Could you please do a crosshatch pen style on this image, suitable for a profile picture?"
+        prompt = "Please turn this into a black and white hedcut-style ink portrait with subtle crosshatching in the background."
 
         # Load the image
         image = Image.open(image_path)
@@ -267,12 +267,61 @@ def analyze_existing_images():
             expected = name_to_filename(name) + '.jpg'
             print(f"   - {name} → needs {expected}")
 
+def reprocess_existing_fellows(temp_output_dir):
+    """Reprocess existing fellow images with updated style to a temp directory"""
+    temp_path = Path(temp_output_dir)
+    temp_path.mkdir(parents=True, exist_ok=True)
+
+    # Setup client for AI processing
+    client = setup_client()
+    if not client:
+        print("❌ Cannot process images without valid API key")
+        return
+
+    # Get existing fellow images
+    fellows_dir = Path('assets/images/fellows')
+    if not fellows_dir.exists():
+        print("❌ Fellows images directory not found")
+        return
+
+    # Get image files
+    image_extensions = {'.jpg', '.jpeg', '.png', '.webp'}
+    image_files = [f for f in fellows_dir.iterdir()
+                   if f.is_file() and f.suffix.lower() in image_extensions]
+
+    print(f"📸 Found {len(image_files)} fellow images to reprocess with updated hedcut style")
+    print(f"📁 Output directory: {temp_path.absolute()}")
+    print("🎨 Using updated hedcut-style prompt")
+
+    processed_count = 0
+    for image_file in sorted(image_files):
+        print(f"\\n🔍 Processing: {image_file.name}")
+
+        # Create output filename with _hedcut suffix
+        output_filename = image_file.stem + '_hedcut.jpg'
+        output_path = temp_path / output_filename
+
+        # Apply crosshatch style with new prompt
+        success = apply_crosshatch_style(client, image_file, output_path)
+
+        if success:
+            print(f"✅ Created: {output_filename}")
+            processed_count += 1
+        else:
+            print(f"❌ Failed to process: {image_file.name}")
+
+    print(f"\\n🎉 Reprocessing complete!")
+    print(f"✅ Successfully processed: {processed_count}/{len(image_files)} images")
+    print(f"📁 Results saved to: {temp_path.absolute()}")
+    print(f"\\nYou can now compare the original and hedcut versions to decide which style you prefer!")
+
 def main():
     parser = argparse.ArgumentParser(description='Process fellow profile images with crosshatch pen style')
     parser.add_argument('--process-folder', help='Process images from input folder')
     parser.add_argument('--crosshatch', action='store_true', help='Apply crosshatch pen style using AI')
     parser.add_argument('--analyze-existing', action='store_true', help='Analyze existing images')
     parser.add_argument('--setup-test', action='store_true', help='Test API setup')
+    parser.add_argument('--reprocess-fellows', help='Reprocess existing fellow images to specified temp directory')
 
     args = parser.parse_args()
 
@@ -287,17 +336,21 @@ def main():
         process_input_folder(args.process_folder, apply_crosshatch=args.crosshatch)
     elif args.analyze_existing:
         analyze_existing_images()
+    elif args.reprocess_fellows:
+        reprocess_existing_fellows(args.reprocess_fellows)
     else:
         print("Usage:")
         print("  python process_fellow_images.py --process-folder input_images/")
         print("  python process_fellow_images.py --process-folder input_images/ --crosshatch")
         print("  python process_fellow_images.py --analyze-existing")
         print("  python process_fellow_images.py --setup-test")
+        print("  python process_fellow_images.py --reprocess-fellows temp_output/")
         print("")
         print("Options:")
-        print("  --crosshatch    Apply crosshatch pen style using Google AI (requires API key)")
-        print("  --analyze       Show current image coverage status")
-        print("  --setup-test    Verify API key is working")
+        print("  --crosshatch         Apply crosshatch pen style using Google AI (requires API key)")
+        print("  --analyze-existing   Show current image coverage status")
+        print("  --setup-test         Verify API key is working")
+        print("  --reprocess-fellows  Reprocess existing fellow images to temp directory with updated style")
 
 if __name__ == '__main__':
     main()

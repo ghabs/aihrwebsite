@@ -277,7 +277,7 @@ function generateFellows() {
                 ${portraitHtml}
             </div>
             <h3 class="fellow-name">${fellow.name}</h3>
-            <p class="fellow-description">${fellow.description}</p>
+            <p class="fellow-description">Fellow</p>
         </div>
     `;
     }).join('');
