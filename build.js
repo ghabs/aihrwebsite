@@ -428,10 +428,14 @@ const html = `<!DOCTYPE html>
                 <h2 class="section-title">STAY UPDATED</h2>
                 <div class="mailing-list-content">
                     <p>Subscribe to our mailing list to receive updates on fellowship activities, research progress, and new opportunities in AI for epistemics and coordination.</p>
-                    <form class="mailing-list-form" action="#" method="post">
+                    <form class="mailing-list-form" action="https://flf.us16.list-manage.com/subscribe/post?u=5e3896f1a7125d63189824900&amp;id=a8ff7fc644&amp;f_id=00debce0f0" method="post" target="_blank">
                         <div class="form-group">
-                            <input type="email" placeholder="Enter your email address" required class="email-input">
-                            <button type="submit" class="btn subscribe-btn">SUBSCRIBE</button>
+                            <input type="email" name="EMAIL" placeholder="Enter your email address" required class="email-input">
+                            <button type="submit" name="subscribe" class="btn subscribe-btn">SUBSCRIBE</button>
+                        </div>
+                        <!-- Mailchimp bot prevention -->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                            <input type="text" name="b_5e3896f1a7125d63189824900_a8ff7fc644" tabindex="-1" value="">
                         </div>
                     </form>
                 </div>
