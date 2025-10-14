@@ -13,4 +13,4 @@ The fellowship was split into three parts:
 - A build phase where they took their initial plans and created prototypes and real-world instantiations of the ideas. 
 - A translation phase where fellows polished their work, reflected on next steps, and presented it to the world.
 
-Below are profiles of the fellows and the projects they built.
+Below are profiles of the fellows and the projects they built. **After our Oct. 15th Demo Day we will update the fellows page with any presentations from the fellows on their projects.**

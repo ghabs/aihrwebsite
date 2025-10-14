@@ -272,7 +272,7 @@ function generateFellows() {
             </div>`;
 
         return `
-        <div class="fellow-card people-item fellow-type" onclick="openFellowModal(${index})" data-fellow-index="${index}" data-type="fellow">
+        <div class="fellow-card people-item fellow-type" data-fellow-index="${index}" data-type="fellow">
             <div class="fellow-portrait">
                 ${portraitHtml}
             </div>
@@ -298,7 +298,7 @@ function generateFellows() {
             </div>`;
 
         return `
-        <div class="advisor-card people-item advisor-type" onclick="window.open('${advisor.website}', '_blank')" data-type="advisor">
+        <div class="advisor-card people-item advisor-type" data-type="advisor">
             <div class="fellow-portrait">
                 ${portraitContent}
             </div>
@@ -395,7 +395,7 @@ const html = `<!DOCTYPE html>
             </div>
 
             <!-- Mode Toggle Controls -->
-            <div class="section-controls">
+            <div class="section-controls" style="display: none;">
                 <!-- Mode Toggle Switch -->
                 <div class="mode-toggle">
                     <div class="toggle-switch">

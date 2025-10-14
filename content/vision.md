@@ -12,7 +12,7 @@ This is superficially puzzling: outcomes are determined by people's actions, so 
 
 Looking to the future and at the biggest scales, there is a real risk that the world goes in directions that essentially nobody wants. Sometimes this breeds apathy. But often, it imparts an appetite, and energy: if only we were empowered with greater skill and wisdom... what then?
 
-Uplifting society to the point where we reliably avoid these errors feels like a big ask. But AI might do a great deal to unlock better tools which can help us on many of these axes. The broad, fuzzy domain of potential AI capabilities that can improve the quality of understanding and coordination, more than they make the world complex, we’re calling AI for human reasoning.
+Uplifting society to the point where we reliably avoid these errors feels like a big ask. But AI might do a great deal to unlock better tools which can help us on many of these axes. The broad, fuzzy domain of potential AI capabilities that can improve the quality of understanding and coordination, more than they make the world complex, we’re calling **AI for Human Reasoning**.
 
 This approach prioritizes developing AI that augments human understanding and decision-making rather than replacing it, ensuring that our collective wisdom can outpace the challenges we create.
 
