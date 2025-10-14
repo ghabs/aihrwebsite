@@ -423,7 +423,7 @@ const html = `<!DOCTYPE html>
         </section>
 
         <!-- Mailing List Section -->
-        <section class="section mailing-list-section">
+        <section class="section mailing-list-section" style="display: none;">
             <div class="main-content">
                 <h2 class="section-title">STAY UPDATED</h2>
                 <div class="mailing-list-content">
