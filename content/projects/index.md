@@ -46,7 +46,7 @@ presentations:
     youtube_url: ""
     links: []
 
-  - title: "OpenNoteNetwork"
+  - title: "Open Note Network"
     fellows: ["Steve Isley"]
     youtube_url: ""
     links: []
@@ -96,7 +96,7 @@ presentations:
     youtube_url: ""
     links: []
 
-  - title: "DeliPol Benchmark"
+  - title: "DeliberationBench"
     fellows: ["Maximilian Kroner Dale", "Luke Hewitt", "Paul de Font-Reaulx"]
     youtube_url: ""
     links: []
