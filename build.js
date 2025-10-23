@@ -11,7 +11,7 @@ const md = new MarkdownIt({
 function readContentFile(filename) {
     const filePath = path.join(__dirname, 'content', filename);
     const fileContent = fs.readFileSync(filePath, 'utf8');
-    
+
     // Parse frontmatter
     const match = fileContent.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
     if (match) {
@@ -19,8 +19,16 @@ function readContentFile(filename) {
         const content = match[2].trim();
         return { frontmatter, content: md.render(content) };
     }
-    
+
     return { frontmatter: {}, content: md.render(fileContent) };
+}
+
+// Helper function to strip duplicate description from fellow content
+function stripDuplicateDescription(markdownContent) {
+    // Remove the first paragraph after the # Name heading, which is the duplicate description
+    // Pattern: # Name\n\n[description paragraph]\n\n## Section
+    const strippedContent = markdownContent.replace(/^#\s+[^\n]+\n\n[^\n#]+(?:\n[^\n#]+)*\n\n(?=##)/m, '');
+    return strippedContent;
 }
 
 // Read fellows
@@ -101,19 +109,10 @@ function readTheorySections() {
     }).sort((a, b) => (a.order || 0) - (b.order || 0));
 }
 
-// Read projects
+// Read projects (now presentations)
 function readProjects() {
-    const projectsDir = path.join(__dirname, 'content', 'projects');
-    const projectFiles = fs.readdirSync(projectsDir).filter(file => file.endsWith('.md'));
-    
-    return projectFiles.map(file => {
-        const projectContent = readContentFile(`projects/${file}`);
-        return {
-            ...projectContent.frontmatter,
-            content: projectContent.content,
-            filename: file
-        };
-    }).sort((a, b) => (a.order || 0) - (b.order || 0));
+    const projectsIndex = readContentFile('projects/index.md');
+    return projectsIndex.frontmatter.presentations || [];
 }
 
 // Load all content
@@ -123,6 +122,7 @@ const beaconProjects = readContentFile('beacon-projects.md');
 const fellowship = readContentFile('fellowship.md');
 const fellowshipDescription = readContentFile('fellowship-description.md');
 const theory = readContentFile('theory.md');
+const privacy = readContentFile('privacy.md');
 const fellows = readFellows();
 const advisors = readAdvisors();
 const projects = readProjects();
@@ -166,46 +166,96 @@ function generateBeaconProjects() {
     `).join('');
 }
 
-// Generate projects listing for projects page
+// Generate presentations listing for projects page
 function generateProjectsListing() {
-    return projects.map(project => `
-        <a href="project-${project.slug}.html" class="project-card">
-            <div class="project-icon">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1">
-                    <circle cx="20" cy="12" r="3" fill="currentColor"/>
-                    <circle cx="8" cy="28" r="3" fill="currentColor"/>
-                    <circle cx="32" cy="28" r="3" fill="currentColor"/>
-                    <circle cx="20" cy="20" r="4" fill="none"/>
-                    <line x1="20" y1="15" x2="20" y2="16"/>
-                    <line x1="17" y1="22" x2="11" y2="26"/>
-                    <line x1="23" y1="22" x2="29" y2="26"/>
-                </svg>
+    if (!projects || projects.length === 0) {
+        return '<p class="no-presentations">No presentations available yet. Check back soon!</p>';
+    }
+
+    return projects.map((presentation, index) => {
+        const fellowsList = presentation.fellows ? presentation.fellows.join(', ') : 'TBD';
+        const linksHtml = presentation.links && presentation.links.length > 0
+            ? presentation.links.map(link =>
+                `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="presentation-link">${link.text}</a>`
+            ).join('')
+            : '';
+
+        return `
+        <div class="presentation-row" data-index="${index}">
+            <div class="presentation-header" onclick="togglePresentation(${index})">
+                <div class="presentation-info">
+                    <h3 class="presentation-title">${presentation.title}</h3>
+                    <p class="presentation-fellows">${fellowsList}</p>
+                </div>
+                <button class="presentation-toggle" aria-label="Toggle presentation details">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
             </div>
-            <h3>${project.title}</h3>
-            <p>${project.description}</p>
-        </a>
-    `).join('');
+            <div class="presentation-content" id="presentation-${index}">
+                ${presentation.youtube_url ? `
+                <div class="presentation-video">
+                    <iframe
+                        src="${presentation.youtube_url}"
+                        title="${presentation.title}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                ` : '<p class="no-video">Video coming soon</p>'}
+                ${linksHtml ? `<div class="presentation-links">${linksHtml}</div>` : ''}
+            </div>
+        </div>
+        `;
+    }).join('');
 }
 
-// Generate projects HTML
+// Generate projects HTML (for homepage - same as presentations)
 function generateProjects() {
-    return projects.map((project, index) => `
-        <div class="project-card" onclick="openProjectModal(${index})" data-project-index="${index}">
-            <div class="project-icon">
-                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="30" cy="18" r="4" fill="currentColor"/>
-                    <circle cx="15" cy="42" r="4" fill="currentColor"/>
-                    <circle cx="45" cy="42" r="4" fill="currentColor"/>
-                    <circle cx="30" cy="30" r="6" fill="none"/>
-                    <line x1="30" y1="22" x2="30" y2="24"/>
-                    <line x1="25" y1="33" x2="19" y2="39"/>
-                    <line x1="35" y1="33" x2="41" y2="39"/>
-                </svg>
+    if (!projects || projects.length === 0) {
+        return '<p class="no-presentations">No presentations available yet.</p>';
+    }
+
+    return projects.map((presentation, index) => {
+        const fellowsList = presentation.fellows ? presentation.fellows.join(', ') : 'TBD';
+        const linksHtml = presentation.links && presentation.links.length > 0
+            ? presentation.links.map(link =>
+                `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="presentation-link">${link.text}</a>`
+            ).join('')
+            : '';
+
+        return `
+        <div class="presentation-row" data-index="${index}">
+            <div class="presentation-header" onclick="togglePresentation(${index})">
+                <div class="presentation-info">
+                    <h3 class="presentation-title">${presentation.title}</h3>
+                    <p class="presentation-fellows">${fellowsList}</p>
+                </div>
+                <button class="presentation-toggle" aria-label="Toggle presentation details">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
             </div>
-            <h3 class="project-name">${project.title}</h3>
-            <p class="project-description">${project.description}</p>
+            <div class="presentation-content" id="presentation-${index}">
+                ${presentation.youtube_url ? `
+                <div class="presentation-video">
+                    <iframe
+                        src="${presentation.youtube_url}"
+                        title="${presentation.title}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                ` : '<p class="no-video">Video coming soon</p>'}
+                ${linksHtml ? `<div class="presentation-links">${linksHtml}</div>` : ''}
+            </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 // Helper function to check if fellow profile image exists
@@ -272,7 +322,7 @@ function generateFellows() {
             </div>`;
 
         return `
-        <div class="fellow-card people-item fellow-type" data-fellow-index="${index}" data-type="fellow">
+        <div class="fellow-card people-item fellow-type" onclick="openFellowModal(${index})" data-fellow-index="${index}" data-type="fellow">
             <div class="fellow-portrait">
                 ${portraitHtml}
             </div>
@@ -395,7 +445,7 @@ const html = `<!DOCTYPE html>
             </div>
 
             <!-- Mode Toggle Controls -->
-            <div class="section-controls" style="display: none;">
+            <div class="section-controls">
                 <!-- Mode Toggle Switch -->
                 <div class="mode-toggle">
                     <div class="toggle-switch">
@@ -416,8 +466,8 @@ const html = `<!DOCTYPE html>
                 ${generateFellows()}
             </div>
 
-            <!-- Projects Grid (hidden by default) -->
-            <div class="projects-grid" id="projectsGrid" style="display: none;">
+            <!-- Presentations List (hidden by default) -->
+            <div class="presentations-list" id="projectsGrid" style="display: none;">
                 ${generateProjects()}
             </div>
         </section>
@@ -441,6 +491,11 @@ const html = `<!DOCTYPE html>
                 </div>
             </div>
         </section>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 2rem 0; margin-top: 3rem; border-top: 1px solid rgba(0, 0, 0, 0.1);">
+            <a href="privacy.html" style="color: #666; text-decoration: none; font-size: 0.9rem;">Privacy Policy</a>
+        </footer>
 
         <!-- Fellow Modal -->
         <div id="fellowModal" class="modal">
@@ -492,11 +547,15 @@ const html = `<!DOCTYPE html>
     <script>
         // Fellow data for modal
         const fellowsData = ${JSON.stringify(fellows.map(fellow => {
-            const fellowContent = readContentFile(`fellows/${fellow.filename}`);
+            // Read the raw content before rendering to strip the duplicate description
+            const rawFellowContent = fs.readFileSync(path.join(__dirname, 'content', 'fellows', fellow.filename), 'utf8');
+            const match = rawFellowContent.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+            const rawMarkdown = match ? match[2].trim() : rawFellowContent;
+            const strippedMarkdown = stripDuplicateDescription(rawMarkdown);
             return {
                 name: fellow.name,
                 description: fellow.description,
-                content: fellowContent.content,
+                content: md.render(strippedMarkdown),
                 imagePath: getFellowImagePath(fellow.name)
             };
         }))};
@@ -606,14 +665,13 @@ const html = `<!DOCTYPE html>
             }
         }
 
-        // Project data for modal (placeholder - will be populated when projects are added)
-        const projectsData = ${JSON.stringify(projects.map(project => {
-            const projectContent = readContentFile(`projects/${project.filename}`);
+        // Project data for modal (now presentations)
+        const projectsData = ${JSON.stringify(projects.map(presentation => {
             return {
-                title: project.title,
-                description: project.description,
-                content: projectContent.content,
-                relatedFellows: project.related_fellows || []
+                title: presentation.title,
+                fellows: presentation.fellows || [],
+                youtube_url: presentation.youtube_url || '',
+                links: presentation.links || []
             };
         }))};
 
@@ -675,8 +733,8 @@ const html = `<!DOCTYPE html>
                     dynamicHeader.textContent = 'PEOPLE';
                 } else if (mode === 'projects') {
                     peopleGrid.style.display = 'none';
-                    projectsGrid.style.display = 'grid';
-                    dynamicHeader.textContent = 'PROJECTS';
+                    projectsGrid.style.display = 'block';
+                    dynamicHeader.textContent = 'PRESENTATIONS';
                 }
             }
 
@@ -695,6 +753,30 @@ const html = `<!DOCTYPE html>
 
             // Initialize with people mode
             switchMode('people');
+        }
+
+        // Presentation toggle functionality
+        function togglePresentation(index) {
+            const content = document.getElementById('presentation-' + index);
+            const row = content.parentElement;
+            const button = row.querySelector('.presentation-toggle');
+
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                button.classList.remove('expanded');
+            } else {
+                // Close all other presentations
+                document.querySelectorAll('.presentation-content.expanded').forEach(el => {
+                    el.classList.remove('expanded');
+                });
+                document.querySelectorAll('.presentation-toggle.expanded').forEach(el => {
+                    el.classList.remove('expanded');
+                });
+
+                // Open this presentation
+                content.classList.add('expanded');
+                button.classList.add('expanded');
+            }
         }
 
         // Initialize the dual-mode interface when DOM is loaded
@@ -757,7 +839,7 @@ const projectsListingHtml = `<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beacon Projects - AI for Epistemics & Coordination</title>
+    <title>Fellow Presentations - AI for Epistemics & Coordination</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -771,22 +853,47 @@ const projectsListingHtml = `<!DOCTYPE html>
                 <li><a href="theory.html">Theory</a></li>
             </ul>
         </nav>
-        
+
         <!-- Header -->
         <header>
             <div class="projects-header">
-                <h1 class="projects-title">BEACON PROJECTS</h1>
+                <h1 class="projects-title">FELLOW PRESENTATIONS</h1>
                 <div class="header-line"></div>
             </div>
         </header>
 
-        <!-- Projects Grid -->
-        <section class="projects-section">
-            <div class="projects-grid">
+        <!-- Presentations List -->
+        <section class="presentations-section">
+            <div class="presentations-list">
                 ${generateProjectsListing()}
             </div>
         </section>
     </div>
+
+    <script>
+        function togglePresentation(index) {
+            const content = document.getElementById('presentation-' + index);
+            const row = content.parentElement;
+            const button = row.querySelector('.presentation-toggle');
+
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                button.classList.remove('expanded');
+            } else {
+                // Close all other presentations
+                document.querySelectorAll('.presentation-content.expanded').forEach(el => {
+                    el.classList.remove('expanded');
+                });
+                document.querySelectorAll('.presentation-toggle.expanded').forEach(el => {
+                    el.classList.remove('expanded');
+                });
+
+                // Open this presentation
+                content.classList.add('expanded');
+                button.classList.add('expanded');
+            }
+        }
+    </script>
 </body>
 </html>`;
 
@@ -1301,20 +1408,47 @@ if (fs.existsSync(assetsImagesPath)) {
     copyDir(assetsImagesPath, imagesDir);
 }
 
+// Generate privacy policy page
+const privacyHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - AI for Human Reasoning</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="fellowship.html">Fellowship</a></li>
+                <li><a href="theory.html">Theory</a></li>
+                <li><a href="privacy.html" class="active">Privacy</a></li>
+            </ul>
+        </nav>
+
+        <!-- Privacy Policy Content -->
+        <section class="theory-intro">
+            <div class="theory-content">
+                ${privacy.content}
+            </div>
+        </section>
+    </div>
+</body>
+</html>`;
+
 // Write the generated HTML files to output directory
 fs.writeFileSync(path.join(outputDir, 'index.html'), html);
 fs.writeFileSync(path.join(outputDir, 'fellowship.html'), fellowshipHtml);
 fs.writeFileSync(path.join(outputDir, 'projects.html'), projectsListingHtml);
 fs.writeFileSync(path.join(outputDir, 'theory.html'), theoryHtml);
-
-// Generate individual project pages
-projects.forEach(project => {
-    const projectPageHtml = generateProjectPage(project);
-    fs.writeFileSync(path.join(outputDir, `project-${project.slug}.html`), projectPageHtml);
-});
+fs.writeFileSync(path.join(outputDir, 'privacy.html'), privacyHtml);
 
 console.log('✅ All pages generated successfully from markdown files!');
-console.log(`📄 Generated: index.html, fellowship.html, projects.html, theory.html, and ${projects.length} project pages`);
+console.log(`📄 Generated: index.html, fellowship.html, projects.html (${projects.length} presentations), theory.html, privacy.html`);
 console.log(`📁 Output directory: ${outputDir}`);
 console.log('🚀 Ready for deployment! Drag the "dist" folder to Netlify.');
 console.log('📝 Edit content in the content/ folder, then run "npm run build" to regenerate.');
