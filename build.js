@@ -174,6 +174,30 @@ function generateProjectsListing() {
 
     return projects.map((presentation, index) => {
         const fellowsList = presentation.fellows ? presentation.fellows.join(', ') : 'TBD';
+        const isDirectLink = !presentation.youtube_url && presentation.links && presentation.links.length > 0;
+
+        // If no video but has links, render as direct link
+        if (isDirectLink) {
+            const linkUrl = presentation.links[0].url;
+            return `
+            <a href="${linkUrl}" target="_blank" rel="noopener noreferrer" class="presentation-row presentation-link-row" data-index="${index}">
+                <div class="presentation-header">
+                    <div class="presentation-info">
+                        <h3 class="presentation-title">${presentation.title}</h3>
+                        <p class="presentation-fellows">${fellowsList}</p>
+                    </div>
+                    <div class="presentation-toggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+            `;
+        }
+
+        // Normal expandable presentation
         const linksHtml = presentation.links && presentation.links.length > 0
             ? presentation.links.map(link =>
                 `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="presentation-link">${link.text}</a>`
@@ -220,6 +244,30 @@ function generateProjects() {
 
     return projects.map((presentation, index) => {
         const fellowsList = presentation.fellows ? presentation.fellows.join(', ') : 'TBD';
+        const isDirectLink = !presentation.youtube_url && presentation.links && presentation.links.length > 0;
+
+        // If no video but has links, render as direct link
+        if (isDirectLink) {
+            const linkUrl = presentation.links[0].url;
+            return `
+            <a href="${linkUrl}" target="_blank" rel="noopener noreferrer" class="presentation-row presentation-link-row" data-index="${index}">
+                <div class="presentation-header">
+                    <div class="presentation-info">
+                        <h3 class="presentation-title">${presentation.title}</h3>
+                        <p class="presentation-fellows">${fellowsList}</p>
+                    </div>
+                    <div class="presentation-toggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+            `;
+        }
+
+        // Normal expandable presentation
         const linksHtml = presentation.links && presentation.links.length > 0
             ? presentation.links.map(link =>
                 `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="presentation-link">${link.text}</a>`
