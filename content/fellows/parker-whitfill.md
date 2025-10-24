@@ -1,23 +1,21 @@
 ---
 name: "Parker Whitfill"
-description: "Research focus and expertise in AI for human reasoning"
+description: "Parker Whitfill is an Econ PhD at MIT primarily working to understand AI progress and its effect on the economy."
 order: 24
 ---
 
 # Parker Whitfill
 
-Research focus and expertise in AI for human reasoning
+Parker Whitfill is an Econ PhD at MIT primarily working to understand AI progress and its effect on the economy.
 
 ## Research Focus
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Parker created pivotal, an app that helps teams coordinate on scheduling, recording action items, and recording organizational context.
 
 ## Projects
 
-- Project 1: Description of ongoing work
-- Project 2: Additional research initiative
-- Project 3: Collaboration with other fellows
+- [Coop.tech](https://coop.tech)
 
-## Background
+## Links
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- [Personal website](https://parkerwhitfill.com)

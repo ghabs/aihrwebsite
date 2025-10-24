@@ -1,23 +1,17 @@
 ---
 name: "Sofia Vanhanen"
-description: "Research focus and expertise in AI for human reasoning"
+description: "Computer scientist and software engineer building innovative systems enhancing human reasoning. Interests span digital democracy, metacognition and tools-for-thought, futures thinking and worldbuilding."
 order: 28
 ---
 
 # Sofia Vanhanen
 
-Research focus and expertise in AI for human reasoning
+Computer scientist and software engineer building innovative systems enhancing human reasoning. Interests span digital democracy, metacognition and tools-for-thought, futures thinking and worldbuilding.
 
 ## Research Focus
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Sofia primarily worked on three projects: Group decision-making software, matchmaking software for the human workforce post-AGI, and a plan for a platform serving as epistemic infrastructure for collective sensemaking around desirable futures.
 
-## Projects
+## Links
 
-- Project 1: Description of ongoing work
-- Project 2: Additional research initiative
-- Project 3: Collaboration with other fellows
-
-## Background
-
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- [Personal website](https://sofiavanhanen.fi)

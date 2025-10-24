@@ -1,23 +1,22 @@
 ---
 name: "Kai J. Sandbrink"
-description: "Research focus and expertise in AI for human reasoning"
+description: "Kai J. Sandbrink is a PhD student at the University of Oxford in computational cognitive neuroscience."
 order: 4
 ---
 
 # Kai J. Sandbrink
 
-Oxgenred oamm elles
+Kai J. Sandbrink is a PhD student at the University of Oxford in computational cognitive neuroscience.
 
 ## Research Focus
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Kai worked on benchmarks and evaluations for coordination technology, including the coordination agent Pivotal.
 
 ## Projects
 
-- Project 1: Description of ongoing work
-- Project 2: Additional research initiative
-- Project 3: Collaboration with other fellows
+- [Coop.tech](https://coop.tech/)
+- [Pivotal on GitHub](https://github.com/cooperativetech/pivotal)
 
-## Background
+## Links
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- [LinkedIn profile](https://www.linkedin.com/in/kaisandbrink/)

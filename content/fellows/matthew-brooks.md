@@ -1,23 +1,23 @@
 ---
 name: "Matthew Brooks"
-description: "Research focus and expertise in AI for human reasoning"
+description: "Matt is a tech entrepreneur deeply interested in helping AI go well for humanity. He is experienced in 0 to 1 building, SaaS development, product ideation and iteration, and tinkering with AI."
 order: 19
 ---
 
 # Matthew Brooks
 
-Research focus and expertise in AI for human reasoning
+Matt is a tech entrepreneur deeply interested in helping AI go well for humanity. He is experienced in 0 to 1 building, SaaS development, product ideation and iteration, and tinkering with AI.
 
 ## Research Focus
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+During the fellowship, Matt built many MVPs to test different ideas related to AI-driven human empowerment and enablement. His projects clustered around the themes of sensemaking with unstructured data, communication (digital twin, AI filtering), and matching and coordination. He is still exploring which areas to focus on post-fellowship.
 
 ## Projects
 
-- Project 1: Description of ongoing work
-- Project 2: Additional research initiative
-- Project 3: Collaboration with other fellows
+- [Sealed Note (live and public)](https://www.sealednote.com)
+- [Personal website with project writeups](https://mattbrooks.xyz/)
+- [GitHub projects](https://github.com/MattB543/)
 
-## Background
+## Links
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- [Personal website](https://mattbrooks.xyz/)

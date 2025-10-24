@@ -1,23 +1,23 @@
 ---
 name: "Martin Ciesielski-Listwan"
-description: "Research focus and expertise in AI for human reasoning"
+description: "Martin Ciesielski-Listwan conducts experiments in epistemic infrastructure at scale."
 order: 3
 ---
 
 # Martin Ciesielski-Listwan
 
-Frcen countatuonln
+Martin Ciesielski-Listwan conducts experiments in epistemic infrastructure at scale.
 
 ## Research Focus
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Martin's work focuses on experiments in epistemic infrastructure at scale, exploring how technology can enhance collective reasoning and knowledge validation across large communities.
 
 ## Projects
 
-- Project 1: Description of ongoing work
-- Project 2: Additional research initiative
-- Project 3: Collaboration with other fellows
+- Image Epistemics
+- Epistemics Arena
+- RiskWatch: A Risks Threat Observatory enabled by Prediction Markets
 
-## Background
+## Links
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- [Personal website](https://alyssia-j.com/)

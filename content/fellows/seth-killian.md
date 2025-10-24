@@ -1,23 +1,15 @@
 ---
 name: "Seth Killian"
-description: "Research focus and expertise in AI for human reasoning"
+description: "Seth brings expertise in game design, balance, system dynamics, and incentive fields. He has experience in startups, scaling, prototyping, and community stewardship."
 order: 26
 ---
 
 # Seth Killian
 
-Research focus and expertise in AI for human reasoning
+Seth brings expertise in game design, balance, system dynamics, and incentive fields. He has experience in startups, scaling, prototyping, and community stewardship.
 
 ## Research Focus
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Seth is interested in counterbalancing defensive policy (minimizing mistakes, keeping bad numbers low) with ambitious "offensive" articulations of high-water marks (making good numbers go up). He explores whether we can scout stable collaborative equilibria and work backwards to their necessary preconditions.
 
-## Projects
-
-- Project 1: Description of ongoing work
-- Project 2: Additional research initiative
-- Project 3: Collaboration with other fellows
-
-## Background
-
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+His work focuses on trust scaffolds, multi-agent equilibria and their limits. Seth seeks aspirational benchmarks that can surf Goodhart's Law, and is investigating how best to canvas the existing landscape of multi-agent sandboxes—determining where to collaborate and extend versus building something new.

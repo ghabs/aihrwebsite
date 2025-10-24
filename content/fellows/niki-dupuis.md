@@ -1,23 +1,17 @@
 ---
 name: "Niki Dupuis"
-description: "Research focus and expertise in AI for human reasoning"
+description: "Niki has a background in AI/ML (MSc), and has been doing independent research on using LLMs to augment human thinking for a couple years (within the EA/AI Safety/Lesswrong blogosphere)."
 order: 22
 ---
 
 # Niki Dupuis
 
-Research focus and expertise in AI for human reasoning
+Niki has a background in AI/ML (MSc), and has been doing independent research on using LLMs to augment human thinking for a couple years (within the EA/AI Safety/Lesswrong blogosphere).
 
 ## Research Focus
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Niki has been exploring topics in scaling bottom-up coordination, from decentralized trust building to matchmaking for collective action. He ended up settling on working primarily on using LLMs to better understand existing internet discourse, and map out the landscape of opinions, with an emphasis on detecting and preventing polarization. He also worked on a semi-automated argument mapper.
 
 ## Projects
 
-- Project 1: Description of ongoing work
-- Project 2: Additional research initiative
-- Project 3: Collaboration with other fellows
-
-## Background
-
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- [List of fellowship projects and links](https://lovedoesnotscale.com/flf)

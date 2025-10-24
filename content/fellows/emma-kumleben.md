@@ -1,23 +1,19 @@
 ---
 name: "Emma Kumleben"
-description: "Research focus and expertise in AI for human reasoning"
+description: "Background in policy, government, and geopolitical advisory."
 order: 2
 ---
 
 # Emma Kumleben
 
-Prelivs suekchanflarting ehtolatny
+Background in policy, government, and geopolitical advisory.
 
 ## Research Focus
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Worked on AI for improving decision-making under uncertainty in policy and government contexts. This took the form of simulation software to assist with scenario generation and wargaming - but ultimately should look like a suite of tools helping make foresight accessible and decision-relevant across a variety of policy contexts.
 
-## Projects
+Also worked on AI for sensemaking of the expanding literature on AI impacts and future scenarios, and on SF OS, a platform for collaboration between San Francisco government and civic technologists, to accelerate the adoption of beneficial AI into local government.
 
-- Project 1: Description of ongoing work
-- Project 2: Additional research initiative
-- Project 3: Collaboration with other fellows
+## Links
 
-## Background
-
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- [LinkedIn profile](https://www.linkedin.com/in/emma-kumleben/)

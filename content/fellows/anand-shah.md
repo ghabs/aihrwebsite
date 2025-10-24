@@ -1,23 +1,17 @@
 ---
 name: "Anand Shah"
-description: "Research focus and expertise in AI for human reasoning"
+description: "Anand Shah is a PhD student at MIT Sloan interested in market design and EconCS theory. His research interests focus on agent design, particularly for automating negotiation, and more generally, optimal design of marketplaces and an economy built around AI agents."
 order: 11
 ---
 
 # Anand Shah
 
-Brantel codes merging protocols
+Anand Shah is a PhD student at MIT Sloan interested in market design and EconCS theory. His research interests focus on agent design, particularly for automating negotiation, and more generally, optimal design of marketplaces and an economy built around AI agents.
 
 ## Research Focus
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Anand's work centers on agent design, particularly for automating negotiation processes. He is interested in the optimal design of marketplaces and building an economy around AI agents. During the fellowship, Anand worked on Pivotal, an app that helps teams coordinate on scheduling, recording action items, and recording organizational context.
 
 ## Projects
 
-- Project 1: Description of ongoing work
-- Project 2: Additional research initiative
-- Project 3: Collaboration with other fellows
-
-## Background
-
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- [Coop.tech](https://coop.tech)
