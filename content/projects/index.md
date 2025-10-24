@@ -84,7 +84,9 @@ presentations:
   - title: "Updraft Demo"
     fellows: ["Robert Gordon"]
     youtube_url: ""
-    links: []
+    links:
+      - url: "https://www.updraft.to/"
+        text: "Updraft Website"
 
   - title: "Virtuous"
     fellows: ["Paul de Font-Reaulx"]
@@ -114,7 +116,9 @@ presentations:
   - title: "Sentinel"
     fellows: ["Nuno Sempere"]
     youtube_url: ""
-    links: []
+    links:
+      - url: "https://blog.sentinel-team.org/"
+        text: "Sentinel Blog"
 
   - title: "An AI Policy/Strategy Simulation Engine"
     fellows: ["Alexander van Grootel", "Emma Kumleben"]
