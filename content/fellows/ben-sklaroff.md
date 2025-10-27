@@ -15,7 +15,7 @@ Ben and his team have built a multi-agent orchestration tool for coordination. P
 ## Projects
 
 - [Coop.tech](https://coop.tech)
-- [Pivotal on GitHub](https://github.com/cooperativetech/pivotal)
+- [Pivotal on GitHub](https://github.com/pivotal-flf/pivotal)
 
 ## Links
 
