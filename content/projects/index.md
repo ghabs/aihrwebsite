@@ -8,7 +8,7 @@ presentations:
 
   - title: "Pivotal"
     fellows: ["Anand Shah", "Parker Whitfill", "Kai Sandbrink", "Ben Sklaroff"]
-    youtube_url: "https://www.youtube.com/embed/20yWMxAx6QI"
+    youtube_url: "https://www.youtube.com/embed/9lX6cwiw0Ac"
     links:
       - url: "https://github.com/pivotal-flf/pivotal"
         text: "GitHub Repo"
@@ -79,7 +79,7 @@ presentations:
 
   - title: "Worker-Owned Startup Governance"
     fellows: ["Ben Sklaroff"]
-    youtube_url: "https://www.youtube.com/embed/9lX6cwiw0Ac"
+    youtube_url: "https://www.youtube.com/embed/20yWMxAx6QI"
     links: []
 
   - title: "Society Library: AI Evals for Civilization-Scale Reasoning"

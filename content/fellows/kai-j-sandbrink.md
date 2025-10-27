@@ -15,7 +15,7 @@ Kai worked on benchmarks and evaluations for coordination technology, including 
 ## Projects
 
 - [Coop.tech](https://coop.tech/)
-- [Pivotal on GitHub](https://github.com/cooperativetech/pivotal)
+- [Pivotal on GitHub](https://github.com/pivotal-flf/pivotal)
 
 ## Links
 
