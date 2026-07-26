@@ -7,6 +7,14 @@ const md = new MarkdownIt({
     html: true // Allow HTML tags in markdown
 });
 
+// Backup-site banner. Remove this block and the withBackupBanner() calls below
+// once the main site (aiforhumanreasoning.org) is restored by FLF.
+const BACKUP_BANNER = `<div style="background:#7c2d12;color:#fff;text-align:center;padding:8px 16px;font-size:14px;font-family:sans-serif;line-height:1.4;">Backup/dev mirror of aiforhumanreasoning.org.</div>`;
+
+function withBackupBanner(page) {
+    return page.replace('<body>', `<body>\n${BACKUP_BANNER}`);
+}
+
 // Read content files
 function readContentFile(filename) {
     const filePath = path.join(__dirname, 'content', filename);
@@ -1489,11 +1497,11 @@ const privacyHtml = `<!DOCTYPE html>
 </html>`;
 
 // Write the generated HTML files to output directory
-fs.writeFileSync(path.join(outputDir, 'index.html'), html);
-fs.writeFileSync(path.join(outputDir, 'fellowship.html'), fellowshipHtml);
-fs.writeFileSync(path.join(outputDir, 'projects.html'), projectsListingHtml);
-fs.writeFileSync(path.join(outputDir, 'theory.html'), theoryHtml);
-fs.writeFileSync(path.join(outputDir, 'privacy.html'), privacyHtml);
+fs.writeFileSync(path.join(outputDir, 'index.html'), withBackupBanner(html));
+fs.writeFileSync(path.join(outputDir, 'fellowship.html'), withBackupBanner(fellowshipHtml));
+fs.writeFileSync(path.join(outputDir, 'projects.html'), withBackupBanner(projectsListingHtml));
+fs.writeFileSync(path.join(outputDir, 'theory.html'), withBackupBanner(theoryHtml));
+fs.writeFileSync(path.join(outputDir, 'privacy.html'), withBackupBanner(privacyHtml));
 
 console.log('✅ All pages generated successfully from markdown files!');
 console.log(`📄 Generated: index.html, fellowship.html, projects.html (${projects.length} presentations), theory.html, privacy.html`);
