@@ -39,7 +39,6 @@ aihr_website/
 │   ├── vision.md             # Homepage vision section
 │   ├── fellowship.md         # Fellowship intro text on homepage
 │   ├── fellowship-description.md  # Longer text on the /fellowship page
-│   ├── beacon-projects.md    # Three beacon project cards on homepage
 │   ├── theory.md             # Theory page intro
 │   ├── privacy.md            # Privacy policy page
 │   ├── fellows/              # One .md file per fellow
@@ -115,25 +114,6 @@ Markdown body text...
 ### Fellowship page description (`content/fellowship-description.md`)
 
 Longer text shown at the top of the `/fellowship` page.
-
-### Beacon projects (`content/beacon-projects.md`)
-
-Three cards shown on the homepage. Each card links to a project detail page.
-
-```yaml
----
-title: "BEACON PROJECTS"
-projects:
-  - title: "AI MEDIATION"
-    description: "Short description of the project."
-    link: "ai-mediation"        # becomes project-ai-mediation.html
-    icon: "mediation"           # options: mediation | layers | settings
-  - title: "COLLECTIVE INTELLIGENCE"
-    description: "..."
-    link: "collective-intelligence"
-    icon: "layers"
----
-```
 
 ---
 
