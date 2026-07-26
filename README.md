@@ -269,6 +269,24 @@ That's it — the live site is updated immediately.
 
 ---
 
+## Backup site (GitHub Pages, automatic)
+
+A second copy of the site is hosted on GitHub Pages at
+**https://ghabs.github.io/aihrwebsite/** as a personal backup.
+
+Unlike Netlify, this deploys automatically. The workflow in
+`.github/workflows/deploy.yml` runs on every push to `main` of the
+`ghabs/aihrwebsite` repo: it installs dependencies, runs `npm run build`, and
+publishes `dist/` to Pages. There is nothing to run by hand.
+
+- Trigger a deploy: push to `main` (or run the workflow manually from the repo's
+  **Actions** tab via *Run workflow*).
+- Watch a run: `gh run watch` or the repo's **Actions** tab.
+- The workflow is gated to the `ghabs/aihrwebsite` repo, so pushing the same
+  code to the `flf` org remote does not trigger a Pages deploy there.
+
+---
+
 ## Common tasks
 
 ### Add a new fellow
