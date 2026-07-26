@@ -126,7 +126,6 @@ function readProjects() {
 // Load all content
 const hero = readContentFile('hero.md');
 const vision = readContentFile('vision.md');
-const beaconProjects = readContentFile('beacon-projects.md');
 const fellowship = readContentFile('fellowship.md');
 const fellowshipDescription = readContentFile('fellowship-description.md');
 const theory = readContentFile('theory.md');
@@ -137,18 +136,6 @@ const projects = readProjects();
 const research = readResearch();
 const theorySections = readTheorySections();
 
-// Icon mapping
-const iconSvgs = {
-    mediation: `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="m22 21-3-3m0 0a5.5 5.5 0 0 0 0-7.8 5.5 5.5 0 0 0-7.8 0 5.5 5.5 0 0 0 0 7.8 5.5 5.5 0 0 0 7.8 0z"/>`,
-    layers: `<path d="M12 2L2 7l10 5 10-5-10-5z"/>
-             <path d="M2 17l10 5 10-5"/>
-             <path d="M2 12l10 5 10-5"/>`,
-    settings: `<circle cx="12" cy="12" r="3"/>
-               <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>`
-};
-
 // Network node SVG
 const networkNodeSvg = `<circle cx="12" cy="5" r="2"/>
                         <circle cx="5" cy="19" r="2"/>
@@ -157,22 +144,6 @@ const networkNodeSvg = `<circle cx="12" cy="5" r="2"/>
                         <line x1="12" y1="7" x2="12" y2="9"/>
                         <line x1="10.94" y1="13.06" x2="6.88" y2="17.12"/>
                         <line x1="13.06" y1="13.06" x2="17.12" y2="17.12"/>`;
-
-// Generate beacon projects HTML for homepage
-function generateBeaconProjects() {
-    const projectsData = beaconProjects.frontmatter.projects || [];
-    return projectsData.map(project => `
-        <a href="project-${project.link.replace('#', '')}.html" class="beacon-card">
-            <div class="beacon-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    ${iconSvgs[project.icon] || ''}
-                </svg>
-            </div>
-            <h3>${project.title.replace(' ', '<br>')}</h3>
-            <p>${project.description}</p>
-        </a>
-    `).join('');
-}
 
 // Generate presentations listing for projects page
 function generateProjectsListing() {
@@ -952,119 +923,6 @@ const projectsListingHtml = `<!DOCTYPE html>
     </script>
 </body>
 </html>`;
-
-// Generate individual project pages
-function generateProjectPage(project) {
-    const foundationalCapabilities = project.foundational_capabilities || [];
-    const fellowshipResearchIds = project.fellowship_research || [];
-    
-    const capabilitiesHtml = foundationalCapabilities.map(cap => `
-        <div class="capability-card">
-            <h3>${cap.title}</h3>
-            <p>${cap.description}</p>
-        </div>
-    `).join('');
-    
-    const researchHtml = fellowshipResearchIds.map(researchId => {
-        const researchItem = research[researchId];
-        if (!researchItem) return '';
-        
-        return `
-        <div class="research-accordion-item">
-            <div class="research-header" onclick="toggleAccordion('${researchId}')">
-                <h4>${researchItem.title}</h4>
-                <p class="research-short-description">${researchItem.short_description}</p>
-                <div class="accordion-toggle">+</div>
-            </div>
-            <div class="research-content" id="research-${researchId}">
-                <div class="research-detail">
-                    ${researchItem.content}
-                </div>
-            </div>
-        </div>
-        `;
-    }).join('');
-    
-    return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beacon Project: ${project.title} - AI for Epistemics & Coordination</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Navigation -->
-        <nav class="main-nav">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html" class="active">Projects</a></li>
-                <li><a href="fellowship.html">Fellowship</a></li>
-                <li><a href="theory.html">Theory</a></li>
-            </ul>
-        </nav>
-        
-        <!-- Project Header -->
-        <section class="project-hero">
-            <div class="project-border">
-                <h1 class="project-title">BEACON PROJECT: ${project.title}</h1>
-                <p class="project-description">${project.description}</p>
-                <div class="project-diagram">
-                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1">
-                        <circle cx="30" cy="18" r="4" fill="currentColor"/>
-                        <circle cx="15" cy="42" r="4" fill="currentColor"/>
-                        <circle cx="45" cy="42" r="4" fill="currentColor"/>
-                        <circle cx="30" cy="30" r="6" fill="none"/>
-                        <line x1="30" y1="22" x2="30" y2="24"/>
-                        <line x1="25" y1="33" x2="19" y2="39"/>
-                        <line x1="35" y1="33" x2="41" y2="39"/>
-                    </svg>
-                </div>
-            </div>
-        </section>
-
-        <!-- Foundational Capabilities -->
-        <section class="capabilities-section">
-            <h2 class="section-title">FOUNDATIONAL CAPABILITIES <span class="capability-count">(${foundationalCapabilities.length})</span></h2>
-            <div class="capabilities-grid">
-                ${capabilitiesHtml}
-            </div>
-        </section>
-
-        <!-- Fellowship Research -->
-        <section class="research-section">
-            <h2 class="section-title">FELLOWSHIP RESEARCH</h2>
-            <div class="research-accordion">
-                ${researchHtml}
-            </div>
-        </section>
-    </div>
-    
-    <script>
-    function toggleAccordion(researchId) {
-        const content = document.getElementById('research-' + researchId);
-        const toggle = event.target.closest('.research-header').querySelector('.accordion-toggle');
-        
-        if (content.style.display === 'block') {
-            content.style.display = 'none';
-            toggle.textContent = '+';
-        } else {
-            // Close all other accordions
-            const allContent = document.querySelectorAll('.research-content');
-            const allToggles = document.querySelectorAll('.accordion-toggle');
-            allContent.forEach(c => c.style.display = 'none');
-            allToggles.forEach(t => t.textContent = '+');
-            
-            // Open this one
-            content.style.display = 'block';
-            toggle.textContent = '−';
-        }
-    }
-    </script>
-</body>
-</html>`;
-}
 
 // Theory page diagrams
 const theoryDiagrams = {
